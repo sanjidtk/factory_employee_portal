@@ -1,0 +1,6 @@
+from django.contrib import admin
+from .models import Shift
+
+@admin.register(Shift)
+class ShiftAdmin(admin.ModelAdmin):
+    list_display = ('get_name_display', 'start_time', 'end_time')
