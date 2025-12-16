@@ -53,7 +53,7 @@ built to simulate real-world HR and operations workflows.
 ![Dashboard](screenshots/dashboard.png)
 
 ###  Admin
-![Admin](screenshots/attendance.png)
+![Admin](screenshots/admin.png)
 
 ### Attendance Admin
 ![Attendance](screenshots/attendance.png)
