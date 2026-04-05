@@ -89,14 +89,51 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
+import dj_database_url
+import urllib.parse
+
+db_url = os.environ.get('DATABASE_URL')
+if db_url:
+    # Handle cases where the password might have special characters needing encoding
+    try:
+        # Check if it's already a valid URL
+        dj_database_url.parse(db_url)
+    except Exception:
+        # Attempt to auto-encode the password if it looks like a postgres URL
+        if db_url.startswith('postgres://') or db_url.startswith('postgresql://'):
+            try:
+                # Basic split: postgres://user:password@host:port/db
+                parts = db_url.split('://', 1)
+                protocol = parts[0]
+                rest = parts[1]
+                
+                auth_and_rest = rest.split('@', 1)
+                auth = auth_and_rest[0]
+                tail = auth_and_rest[1]
+                
+                user_pass = auth.split(':', 1)
+                user = user_pass[0]
+                password = user_pass[1]
+                
+                # Rebuild with encoded password
+                safe_pass = urllib.parse.quote(password)
+                db_url = f"{protocol}://{user}:{safe_pass}@{tail}"
+            except Exception:
+                pass # Fallback to original if surgery fails
 
 DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600
+        conn_max_age=600,
+        env='DATABASE_URL' # Use our (potentially cleaned) variable name if we were to set it back, but config() uses os.environ by default
     )
 }
+
+# Update the actual parsed URL if we modified it
+if db_url:
+    DATABASES['default'] = dj_database_url.parse(db_url, conn_max_age=600)
 
 
 # Password validation
