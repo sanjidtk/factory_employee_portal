@@ -110,10 +110,14 @@ if raw_db_url.startswith(('postgres://', 'postgresql://')):
             auth, tail = rest.rsplit('@', 1)
             user, password = auth.split(':', 1)
             
-            # Rebuild with URL-encoded password
-            safe_db_url = f"{protocol}://{user}:{urllib.parse.quote(password)}@{tail}"
-        except Exception:
-            pass # Fallback to raw if logic fails
+            # Rebuild with URL-encoded password (unquote first to avoid double-encoding)
+            safe_pass = urllib.parse.quote(urllib.parse.unquote(password))
+            safe_db_url = f"{protocol}://{user}:{safe_pass}@{tail}"
+            
+            # Print a masked version for verification in Vercel logs
+            print(f"DATABASE_URL surgery applied: {protocol}://{user}:****@{tail}")
+        except Exception as e:
+            print(f"DATABASE_URL surgery failed: {e}")
 
 # 3. Apply to DATABASES
 DATABASES = {
