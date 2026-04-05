@@ -94,46 +94,31 @@ WSGI_APPLICATION = 'config.wsgi.application'
 import dj_database_url
 import urllib.parse
 
-db_url = os.environ.get('DATABASE_URL')
-if db_url:
-    # Handle cases where the password might have special characters needing encoding
+# 1. Get the raw URL
+raw_db_url = os.environ.get('DATABASE_URL', f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
+
+# 2. Smart Encoding Surgery
+safe_db_url = raw_db_url
+if raw_db_url.startswith(('postgres://', 'postgresql://')):
     try:
-        # Check if it's already a valid URL
-        dj_database_url.parse(db_url)
+        # Check if already valid
+        dj_database_url.parse(raw_db_url)
     except Exception:
-        # Attempt to auto-encode the password if it looks like a postgres URL
-        if db_url.startswith('postgres://') or db_url.startswith('postgresql://'):
-            try:
-                # Basic split: postgres://user:password@host:port/db
-                parts = db_url.split('://', 1)
-                protocol = parts[0]
-                rest = parts[1]
-                
-                auth_and_rest = rest.rsplit('@', 1)
-                auth = auth_and_rest[0]
-                tail = auth_and_rest[1]
-                
-                user_pass = auth.split(':', 1)
-                user = user_pass[0]
-                password = user_pass[1]
-                
-                # Rebuild with encoded password
-                safe_pass = urllib.parse.quote(password)
-                db_url = f"{protocol}://{user}:{safe_pass}@{tail}"
-            except Exception:
-                pass # Fallback to original if surgery fails
+        try:
+            # Handle passwords with special characters (rsplit is safer)
+            protocol, rest = raw_db_url.split('://', 1)
+            auth, tail = rest.rsplit('@', 1)
+            user, password = auth.split(':', 1)
+            
+            # Rebuild with URL-encoded password
+            safe_db_url = f"{protocol}://{user}:{urllib.parse.quote(password)}@{tail}"
+        except Exception:
+            pass # Fallback to raw if logic fails
 
+# 3. Apply to DATABASES
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        env='DATABASE_URL' # Use our (potentially cleaned) variable name if we were to set it back, but config() uses os.environ by default
-    )
+    'default': dj_database_url.parse(safe_db_url, conn_max_age=600)
 }
-
-# Update the actual parsed URL if we modified it
-if db_url:
-    DATABASES['default'] = dj_database_url.parse(db_url, conn_max_age=600)
 
 
 # Password validation
