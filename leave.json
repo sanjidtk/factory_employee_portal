@@ -1,0 +1,1256 @@
+[
+{
+  "model": "leave.leavetype",
+  "pk": 1,
+  "fields": {
+    "name": "Annual Leave",
+    "max_days_per_year": 30,
+    "is_paid": true,
+    "carry_forward": true
+  }
+},
+{
+  "model": "leave.leavetype",
+  "pk": 2,
+  "fields": {
+    "name": "Medical Leave",
+    "max_days_per_year": 30,
+    "is_paid": true,
+    "carry_forward": false
+  }
+},
+{
+  "model": "leave.leavetype",
+  "pk": 3,
+  "fields": {
+    "name": "Casual Leave",
+    "max_days_per_year": 10,
+    "is_paid": true,
+    "carry_forward": false
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 1,
+  "fields": {
+    "employee": 1,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "4.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 2,
+  "fields": {
+    "employee": 1,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "27.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 3,
+  "fields": {
+    "employee": 2,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "26.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 4,
+  "fields": {
+    "employee": 5,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "6.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 5,
+  "fields": {
+    "employee": 1,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 6,
+  "fields": {
+    "employee": 2,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 7,
+  "fields": {
+    "employee": 2,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 8,
+  "fields": {
+    "employee": 3,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 9,
+  "fields": {
+    "employee": 3,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 10,
+  "fields": {
+    "employee": 3,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 11,
+  "fields": {
+    "employee": 4,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 12,
+  "fields": {
+    "employee": 4,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 13,
+  "fields": {
+    "employee": 4,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 14,
+  "fields": {
+    "employee": 5,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 15,
+  "fields": {
+    "employee": 5,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 16,
+  "fields": {
+    "employee": 6,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 17,
+  "fields": {
+    "employee": 6,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 18,
+  "fields": {
+    "employee": 6,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 19,
+  "fields": {
+    "employee": 7,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 20,
+  "fields": {
+    "employee": 7,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 21,
+  "fields": {
+    "employee": 7,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 22,
+  "fields": {
+    "employee": 8,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 23,
+  "fields": {
+    "employee": 8,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "2.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 24,
+  "fields": {
+    "employee": 8,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 25,
+  "fields": {
+    "employee": 9,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 26,
+  "fields": {
+    "employee": 9,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 27,
+  "fields": {
+    "employee": 9,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 28,
+  "fields": {
+    "employee": 10,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 29,
+  "fields": {
+    "employee": 10,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 30,
+  "fields": {
+    "employee": 10,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 31,
+  "fields": {
+    "employee": 11,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 32,
+  "fields": {
+    "employee": 11,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 33,
+  "fields": {
+    "employee": 11,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 34,
+  "fields": {
+    "employee": 12,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 35,
+  "fields": {
+    "employee": 12,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 36,
+  "fields": {
+    "employee": 12,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 37,
+  "fields": {
+    "employee": 13,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 38,
+  "fields": {
+    "employee": 13,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 39,
+  "fields": {
+    "employee": 13,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 40,
+  "fields": {
+    "employee": 14,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 41,
+  "fields": {
+    "employee": 14,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 42,
+  "fields": {
+    "employee": 14,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 43,
+  "fields": {
+    "employee": 15,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 44,
+  "fields": {
+    "employee": 15,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 45,
+  "fields": {
+    "employee": 15,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 46,
+  "fields": {
+    "employee": 16,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 47,
+  "fields": {
+    "employee": 16,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 48,
+  "fields": {
+    "employee": 16,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 49,
+  "fields": {
+    "employee": 17,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 50,
+  "fields": {
+    "employee": 17,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 51,
+  "fields": {
+    "employee": 17,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 52,
+  "fields": {
+    "employee": 18,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 53,
+  "fields": {
+    "employee": 18,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 54,
+  "fields": {
+    "employee": 18,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 55,
+  "fields": {
+    "employee": 22,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 56,
+  "fields": {
+    "employee": 22,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 57,
+  "fields": {
+    "employee": 22,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 58,
+  "fields": {
+    "employee": 24,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 59,
+  "fields": {
+    "employee": 24,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 60,
+  "fields": {
+    "employee": 24,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 61,
+  "fields": {
+    "employee": 27,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 62,
+  "fields": {
+    "employee": 27,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 63,
+  "fields": {
+    "employee": 27,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 64,
+  "fields": {
+    "employee": 29,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 65,
+  "fields": {
+    "employee": 29,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 66,
+  "fields": {
+    "employee": 29,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 67,
+  "fields": {
+    "employee": 31,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 68,
+  "fields": {
+    "employee": 31,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 69,
+  "fields": {
+    "employee": 31,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 70,
+  "fields": {
+    "employee": 32,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 71,
+  "fields": {
+    "employee": 32,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 72,
+  "fields": {
+    "employee": 32,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 73,
+  "fields": {
+    "employee": 37,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 74,
+  "fields": {
+    "employee": 37,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 75,
+  "fields": {
+    "employee": 37,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 76,
+  "fields": {
+    "employee": 42,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 77,
+  "fields": {
+    "employee": 42,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 78,
+  "fields": {
+    "employee": 42,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 79,
+  "fields": {
+    "employee": 49,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 80,
+  "fields": {
+    "employee": 49,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 81,
+  "fields": {
+    "employee": 49,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 82,
+  "fields": {
+    "employee": 52,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 83,
+  "fields": {
+    "employee": 52,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 84,
+  "fields": {
+    "employee": 52,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 85,
+  "fields": {
+    "employee": 54,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 86,
+  "fields": {
+    "employee": 54,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 87,
+  "fields": {
+    "employee": 54,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 88,
+  "fields": {
+    "employee": 55,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 89,
+  "fields": {
+    "employee": 55,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 90,
+  "fields": {
+    "employee": 55,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 91,
+  "fields": {
+    "employee": 60,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 92,
+  "fields": {
+    "employee": 60,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 93,
+  "fields": {
+    "employee": 60,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 94,
+  "fields": {
+    "employee": 68,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 95,
+  "fields": {
+    "employee": 68,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 96,
+  "fields": {
+    "employee": 68,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 97,
+  "fields": {
+    "employee": 73,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 98,
+  "fields": {
+    "employee": 73,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 99,
+  "fields": {
+    "employee": 73,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 100,
+  "fields": {
+    "employee": 75,
+    "leave_type": 1,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 101,
+  "fields": {
+    "employee": 75,
+    "leave_type": 2,
+    "year": 2026,
+    "allocated_days": "30.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leavebalance",
+  "pk": 102,
+  "fields": {
+    "employee": 75,
+    "leave_type": 3,
+    "year": 2026,
+    "allocated_days": "10.00",
+    "used_days": "0.00"
+  }
+},
+{
+  "model": "leave.leaveapplication",
+  "pk": 1,
+  "fields": {
+    "employee": 1,
+    "leave_type": 2,
+    "start_date": "2026-04-06",
+    "end_date": "2026-04-10",
+    "total_days": "4.00",
+    "reason": "Fever and Cold",
+    "status": "Approved",
+    "reviewed_by": 8,
+    "reviewed_at": "2026-04-05T08:55:07Z",
+    "rejection_reason": "",
+    "applied_at": "2026-04-05T08:54:29.284Z"
+  }
+},
+{
+  "model": "leave.leaveapplication",
+  "pk": 2,
+  "fields": {
+    "employee": 1,
+    "leave_type": 1,
+    "start_date": "2026-05-01",
+    "end_date": "2026-06-01",
+    "total_days": "27.00",
+    "reason": "Annual Leave",
+    "status": "Approved",
+    "reviewed_by": 8,
+    "reviewed_at": "2026-04-05T10:57:38.543Z",
+    "rejection_reason": null,
+    "applied_at": "2026-04-05T09:16:04.570Z"
+  }
+},
+{
+  "model": "leave.leaveapplication",
+  "pk": 3,
+  "fields": {
+    "employee": 2,
+    "leave_type": 1,
+    "start_date": "2026-04-09",
+    "end_date": "2026-05-09",
+    "total_days": "26.00",
+    "reason": "Annual leave",
+    "status": "Approved",
+    "reviewed_by": 8,
+    "reviewed_at": "2026-04-05T13:41:35.230Z",
+    "rejection_reason": null,
+    "applied_at": "2026-04-05T13:28:42.051Z"
+  }
+},
+{
+  "model": "leave.leaveapplication",
+  "pk": 4,
+  "fields": {
+    "employee": 5,
+    "leave_type": 1,
+    "start_date": "2026-05-01",
+    "end_date": "2026-05-05",
+    "total_days": "4.00",
+    "reason": "Testing toast notification.",
+    "status": "Approved",
+    "reviewed_by": 8,
+    "reviewed_at": "2026-04-05T13:44:53.083Z",
+    "rejection_reason": null,
+    "applied_at": "2026-04-05T13:44:14.887Z"
+  }
+},
+{
+  "model": "leave.leaveapplication",
+  "pk": 5,
+  "fields": {
+    "employee": 5,
+    "leave_type": 1,
+    "start_date": "2026-04-10",
+    "end_date": "2026-04-12",
+    "total_days": "2.00",
+    "reason": "Testing AJAX approval functionality on Admin Dashboard. No reload, no confirm dialog.",
+    "status": "Approved",
+    "reviewed_by": 8,
+    "reviewed_at": "2026-04-05T13:50:13.322Z",
+    "rejection_reason": null,
+    "applied_at": "2026-04-05T13:49:22.505Z"
+  }
+},
+{
+  "model": "leave.leaveapplication",
+  "pk": 6,
+  "fields": {
+    "employee": 8,
+    "leave_type": 2,
+    "start_date": "2026-04-06",
+    "end_date": "2026-04-07",
+    "total_days": "2.00",
+    "reason": "Fever",
+    "status": "Approved",
+    "reviewed_by": 8,
+    "reviewed_at": "2026-04-05T15:17:27.581Z",
+    "rejection_reason": null,
+    "applied_at": "2026-04-05T13:55:00.742Z"
+  }
+}
+]

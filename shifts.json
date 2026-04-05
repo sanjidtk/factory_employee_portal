@@ -1,0 +1,29 @@
+[
+{
+  "model": "shifts.shift",
+  "pk": 1,
+  "fields": {
+    "name": "M",
+    "start_time": "06:00:00",
+    "end_time": "14:00:00"
+  }
+},
+{
+  "model": "shifts.shift",
+  "pk": 2,
+  "fields": {
+    "name": "E",
+    "start_time": "14:00:00",
+    "end_time": "22:00:00"
+  }
+},
+{
+  "model": "shifts.shift",
+  "pk": 3,
+  "fields": {
+    "name": "N",
+    "start_time": "22:00:00",
+    "end_time": "06:00:00"
+  }
+}
+]

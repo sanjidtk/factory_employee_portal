@@ -1,0 +1,1388 @@
+[
+{
+  "model": "attendance.attendance",
+  "pk": 20,
+  "fields": {
+    "employee": 1,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:29:45.151Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 21,
+  "fields": {
+    "employee": 2,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:30:01.936Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 22,
+  "fields": {
+    "employee": 3,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:30:18.718Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 23,
+  "fields": {
+    "employee": 4,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:30:35.436Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 24,
+  "fields": {
+    "employee": 5,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:30:52.381Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 25,
+  "fields": {
+    "employee": 6,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:31:09.198Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 26,
+  "fields": {
+    "employee": 7,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:31:26.104Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 27,
+  "fields": {
+    "employee": 8,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:31:42.868Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 28,
+  "fields": {
+    "employee": 9,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:31:59.666Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 29,
+  "fields": {
+    "employee": 10,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:32:16.586Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 30,
+  "fields": {
+    "employee": 11,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:32:33.401Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 31,
+  "fields": {
+    "employee": 12,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:32:50.271Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 32,
+  "fields": {
+    "employee": 13,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:33:07.201Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 33,
+  "fields": {
+    "employee": 14,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:33:24.027Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 34,
+  "fields": {
+    "employee": 15,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:33:40.935Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 35,
+  "fields": {
+    "employee": 16,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:33:57.972Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 36,
+  "fields": {
+    "employee": 17,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:34:15.027Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 37,
+  "fields": {
+    "employee": 18,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:34:32.006Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 38,
+  "fields": {
+    "employee": 22,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:34:49.048Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 39,
+  "fields": {
+    "employee": 24,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:35:06.164Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 40,
+  "fields": {
+    "employee": 27,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:35:23.091Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 41,
+  "fields": {
+    "employee": 29,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:35:40.192Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 42,
+  "fields": {
+    "employee": 31,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:35:56.988Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 43,
+  "fields": {
+    "employee": 32,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:36:14.006Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 44,
+  "fields": {
+    "employee": 37,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:36:30.953Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 45,
+  "fields": {
+    "employee": 42,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:36:48.038Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 46,
+  "fields": {
+    "employee": 49,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:37:05.034Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 47,
+  "fields": {
+    "employee": 52,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:37:21.933Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 48,
+  "fields": {
+    "employee": 54,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "06:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:37:38.801Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 49,
+  "fields": {
+    "employee": 55,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 1,
+    "check_in_time": "06:00:00",
+    "check_out_time": "14:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:37:55.718Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 50,
+  "fields": {
+    "employee": 60,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "14:00:00",
+    "check_out_time": "23:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:38:12.657Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 51,
+  "fields": {
+    "employee": 68,
+    "date": "2025-12-16",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2025-12-15T22:38:29.541Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 52,
+  "fields": {
+    "employee": 73,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 3,
+    "check_in_time": "22:00:00",
+    "check_out_time": "09:00:00",
+    "on_time_checkin": true,
+    "created_at": "2025-12-15T22:38:46.538Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 53,
+  "fields": {
+    "employee": 75,
+    "date": "2025-12-16",
+    "status": "P",
+    "shift": 2,
+    "check_in_time": "15:00:00",
+    "check_out_time": "22:00:00",
+    "on_time_checkin": false,
+    "created_at": "2025-12-15T22:39:03.419Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 54,
+  "fields": {
+    "employee": 1,
+    "date": "2026-04-06",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T08:55:15.142Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 55,
+  "fields": {
+    "employee": 1,
+    "date": "2026-04-07",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T08:55:15.146Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 56,
+  "fields": {
+    "employee": 1,
+    "date": "2026-04-08",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T08:55:15.147Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 57,
+  "fields": {
+    "employee": 1,
+    "date": "2026-04-09",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T08:55:15.149Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 58,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-02",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.594Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 59,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-03",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.618Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 60,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-04",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.635Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 61,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-05",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.652Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 62,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-06",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.709Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 63,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-07",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.727Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 64,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-09",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.743Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 65,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-10",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.759Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 66,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-11",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.786Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 67,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-12",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.802Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 68,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-13",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.815Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 69,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-14",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.827Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 70,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-16",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.841Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 71,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-17",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.853Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 72,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-18",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.869Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 73,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-19",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.880Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 74,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-20",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.897Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 75,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-21",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.911Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 76,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-23",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.926Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 77,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-24",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.941Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 78,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-25",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.986Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 79,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-26",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:38.998Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 80,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-27",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:39.012Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 81,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-28",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:39.026Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 82,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-30",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:39.040Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 83,
+  "fields": {
+    "employee": 1,
+    "date": "2026-05-31",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:39.055Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 84,
+  "fields": {
+    "employee": 1,
+    "date": "2026-06-01",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T10:57:39.074Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 85,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-09",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:35.353Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 86,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-11",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:35.383Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 87,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-12",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:35.718Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 88,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-13",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.118Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 89,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-14",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.450Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 90,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-15",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.472Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 91,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-16",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.494Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 92,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-18",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.535Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 93,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-19",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.555Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 94,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-20",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.589Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 95,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-21",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.620Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 96,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-22",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.649Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 97,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-23",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.675Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 98,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-25",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.706Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 99,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-26",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.737Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 100,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-27",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.763Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 101,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-28",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.784Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 102,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-29",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.825Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 103,
+  "fields": {
+    "employee": 2,
+    "date": "2026-04-30",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.882Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 104,
+  "fields": {
+    "employee": 2,
+    "date": "2026-05-02",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.919Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 105,
+  "fields": {
+    "employee": 2,
+    "date": "2026-05-03",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.937Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 106,
+  "fields": {
+    "employee": 2,
+    "date": "2026-05-04",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.955Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 107,
+  "fields": {
+    "employee": 2,
+    "date": "2026-05-05",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:36.974Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 108,
+  "fields": {
+    "employee": 2,
+    "date": "2026-05-06",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:37.014Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 109,
+  "fields": {
+    "employee": 2,
+    "date": "2026-05-07",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:37.039Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 110,
+  "fields": {
+    "employee": 2,
+    "date": "2026-05-09",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:41:37.057Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 111,
+  "fields": {
+    "employee": 5,
+    "date": "2026-05-02",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:44:53.203Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 112,
+  "fields": {
+    "employee": 5,
+    "date": "2026-05-03",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:44:53.722Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 113,
+  "fields": {
+    "employee": 5,
+    "date": "2026-05-04",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:44:53.936Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 114,
+  "fields": {
+    "employee": 5,
+    "date": "2026-05-05",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:44:54.050Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 115,
+  "fields": {
+    "employee": 5,
+    "date": "2026-04-11",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:50:13.367Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 116,
+  "fields": {
+    "employee": 5,
+    "date": "2026-04-12",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T13:50:13.388Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 117,
+  "fields": {
+    "employee": 8,
+    "date": "2026-04-06",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T15:17:27.610Z"
+  }
+},
+{
+  "model": "attendance.attendance",
+  "pk": 118,
+  "fields": {
+    "employee": 8,
+    "date": "2026-04-07",
+    "status": "L",
+    "shift": null,
+    "check_in_time": null,
+    "check_out_time": null,
+    "on_time_checkin": false,
+    "created_at": "2026-04-05T15:17:27.621Z"
+  }
+}
+]

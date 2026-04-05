@@ -3,18 +3,12 @@ from datetime import datetime, date, timedelta
 
 
 class Shift(models.Model):
-    SHIFT_CHOICES = [
-        ("M", "Morning"),
-        ("E", "Evening"),
-        ("N", "Night"),
-    ]
-
-    name = models.CharField(max_length=1, choices=SHIFT_CHOICES)
+    name = models.CharField(max_length=50, unique=True)
     start_time = models.TimeField()
     end_time = models.TimeField()
 
     def __str__(self):
-        return self.get_name_display()
+        return self.name
 
     def duration_hours(self):
         start = datetime.combine(date.today(), self.start_time)

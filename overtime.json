@@ -1,0 +1,26 @@
+[
+{
+  "model": "overtime.overtime",
+  "pk": 1,
+  "fields": {
+    "employee": 73,
+    "attendance": 52,
+    "overtime_hours": 3.0,
+    "approval_status": "A",
+    "decision_reason": "",
+    "created_at": "2025-12-16T06:24:25.781Z"
+  }
+},
+{
+  "model": "overtime.overtime",
+  "pk": 2,
+  "fields": {
+    "employee": 60,
+    "attendance": 50,
+    "overtime_hours": 1.0,
+    "approval_status": "A",
+    "decision_reason": null,
+    "created_at": "2025-12-16T07:44:44.156Z"
+  }
+}
+]

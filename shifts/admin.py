@@ -3,7 +3,7 @@ from .models import Shift
 
 @admin.register(Shift)
 class ShiftAdmin(admin.ModelAdmin):
-    list_display = ('get_name_display', 'start_time', 'end_time')
+    list_display = ('name', 'start_time', 'end_time')
     search_fields = ('name',)
     
     fieldsets = (

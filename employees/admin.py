@@ -1,15 +1,21 @@
 from django.contrib import admin
-from .models import Employee, Department
+from .models import Employee, Department, Designation
+
+@admin.register(Designation)
+class DesignationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'department')
+    search_fields = ('name',)
+    list_filter = ('department',)
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('employee_id', 'full_name', 'department', 'role', 'manager', 'is_active')
-    search_fields = ('employee_id', 'full_name', 'role')
-    list_filter = ('role', 'department', 'is_active')
+    list_display = ('emp_id', 'first_name', 'last_name', 'department', 'designation', 'role', 'manager', 'is_active')
+    search_fields = ('emp_id', 'first_name', 'last_name', 'role')
+    list_filter = ('role', 'department', 'designation', 'is_active')
     
     fieldsets = (
         ('Personal Info', {
-            'fields': ('user', 'full_name', 'employee_id')
+            'fields': ('user', 'first_name', 'last_name', 'phone', 'email', 'emp_id')
         }),
         ('Job Details', {
             'fields': ('department', 'designation', 'role', 'manager')

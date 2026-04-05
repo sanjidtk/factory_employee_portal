@@ -34,14 +34,17 @@ class LeaveBalance(models.Model):
         return f"{self.employee.full_name} - {self.leave_type.name} ({self.year})"
 
 
+from django.contrib.auth.models import User
+
 class LeaveApplication(models.Model):
     STATUS_CHOICES = (
         ('Pending', 'Pending'),
         ('Approved', 'Approved'),
         ('Rejected', 'Rejected'),
+        ('Cancelled', 'Cancelled'),
     )
 
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='leave_applications')
     leave_type = models.ForeignKey(LeaveType, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
@@ -49,11 +52,19 @@ class LeaveApplication(models.Model):
     reason = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     
-    reviewed_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
+    approver = models.ForeignKey(
+        Employee, 
         on_delete=models.SET_NULL, 
         null=True, 
-        blank=True
+        blank=True,
+        related_name='approvals_to_handle'
+    )
+    reviewed_by = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name='reviewed_leaves'
     )
     reviewed_at = models.DateTimeField(null=True, blank=True)
     rejection_reason = models.TextField(null=True, blank=True)
@@ -64,19 +75,17 @@ class LeaveApplication(models.Model):
             raise ValidationError("End date cannot be before start date.")
 
     def calculate_total_days(self):
-        # Exclude Fridays
         if not self.start_date or not self.end_date:
             return 0
         days = 0
         current_date = self.start_date
         while current_date <= self.end_date:
-            if current_date.weekday() != 4:  # 4 is Friday in python date.weekday()
+            if current_date.weekday() != 4:  # 4 is Friday
                 days += 1
             current_date += timedelta(days=1)
         return Decimal(days)
 
     def save(self, *args, **kwargs):
-        # Calculate total days before saving
         if not self.total_days or (not self.pk):
             self.total_days = self.calculate_total_days()
 
@@ -87,17 +96,13 @@ class LeaveApplication(models.Model):
 
         super().save(*args, **kwargs)
 
-        # Lazy imports for Attendance inside save to prevent cyclic importing
         from attendance.models import Attendance
-        
-        # Detect status change to Approved
         if is_new and self.status == 'Approved':
             self.approve_leave(Attendance)
         elif not is_new and old_instance.status != 'Approved' and self.status == 'Approved':
             self.approve_leave(Attendance)
 
     def approve_leave(self, Attendance):
-        # Deduct balance
         balance, created = LeaveBalance.objects.get_or_create(
             employee=self.employee,
             leave_type=self.leave_type,
@@ -107,22 +112,32 @@ class LeaveApplication(models.Model):
         balance.used_days += self.total_days
         balance.save()
 
-        # Update Attendance Records as 'L'
         current_date = self.start_date
         while current_date <= self.end_date:
-            if current_date.weekday() != 4:  # Don't update over weekend/Friday if usually off
+            if current_date.weekday() != 4:
                 attendance, created_att = Attendance.objects.get_or_create(
                     employee=self.employee,
                     date=current_date,
-                    defaults={'status': 'L'}
+                    defaults={'status': 'On Leave'}
                 )
                 if not created_att:
-                    attendance.status = 'L'
-                    # Reset checkin times
-                    attendance.check_in_time = None
-                    attendance.check_out_time = None
+                    attendance.status = 'On Leave'
+                    attendance.check_in = None
+                    attendance.check_out = None
                     attendance.save()
             current_date += timedelta(days=1)
 
     def __str__(self):
         return f"{self.employee.full_name} - {self.leave_type.name} ({self.status})"
+
+
+class LeaveAuditLog(models.Model):
+    leave_application = models.ForeignKey(LeaveApplication, on_delete=models.CASCADE, related_name='audit_logs')
+    action = models.CharField(max_length=100)
+    performed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    performed_at = models.DateTimeField(auto_now_add=True)
+    note = models.TextField(blank=True, null=True)
+    was_self_approval = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.leave_application} - {self.action} by {self.performed_by}"

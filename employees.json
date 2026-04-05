@@ -1,0 +1,560 @@
+[
+{
+  "model": "employees.department",
+  "pk": 2,
+  "fields": {
+    "name": "Production",
+    "manager": 1
+  }
+},
+{
+  "model": "employees.department",
+  "pk": 3,
+  "fields": {
+    "name": "Quality Control",
+    "manager": 3
+  }
+},
+{
+  "model": "employees.department",
+  "pk": 4,
+  "fields": {
+    "name": "Maintenance",
+    "manager": 2
+  }
+},
+{
+  "model": "employees.department",
+  "pk": 5,
+  "fields": {
+    "name": "Packing",
+    "manager": 4
+  }
+},
+{
+  "model": "employees.department",
+  "pk": 6,
+  "fields": {
+    "name": "HR",
+    "manager": 5
+  }
+},
+{
+  "model": "employees.department",
+  "pk": 7,
+  "fields": {
+    "name": "Stores",
+    "manager": 10
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 1,
+  "fields": {
+    "user": 4,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP001",
+    "full_name": "John Carry",
+    "department": 2,
+    "designation": "Machine Operator",
+    "is_active": true,
+    "date_joined": "2023-01-10"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 2,
+  "fields": {
+    "user": 5,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP002",
+    "full_name": "Ahmed Khan",
+    "department": 4,
+    "designation": "Technician",
+    "is_active": true,
+    "date_joined": "2022-06-05"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 3,
+  "fields": {
+    "user": 6,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP003",
+    "full_name": "Suresh Kumar",
+    "department": 3,
+    "designation": "QC Inspector",
+    "is_active": true,
+    "date_joined": "2023-03-15"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 4,
+  "fields": {
+    "user": 7,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP004",
+    "full_name": "Maria Lopez",
+    "department": 5,
+    "designation": "Packing Supervisor",
+    "is_active": true,
+    "date_joined": "2021-11-20"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 5,
+  "fields": {
+    "user": 8,
+    "role": "admin",
+    "manager": null,
+    "employee_id": "EMP005",
+    "full_name": "Fatima Noor",
+    "department": 6,
+    "designation": "HR Executive",
+    "is_active": true,
+    "date_joined": "2022-09-01"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 6,
+  "fields": {
+    "user": 9,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP006",
+    "full_name": "Abdul Karem",
+    "department": 2,
+    "designation": "Production Exceutive",
+    "is_active": true,
+    "date_joined": "2021-11-01"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 7,
+  "fields": {
+    "user": 10,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP007",
+    "full_name": "Rahul Menon",
+    "department": 2,
+    "designation": "Machine Operator",
+    "is_active": true,
+    "date_joined": "2022-02-14"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 8,
+  "fields": {
+    "user": 11,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP008",
+    "full_name": "Salman Ali",
+    "department": 4,
+    "designation": "Technician",
+    "is_active": true,
+    "date_joined": "2021-08-09"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 9,
+  "fields": {
+    "user": 12,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP009",
+    "full_name": "Arjun Nair",
+    "department": 3,
+    "designation": "QC Inspector",
+    "is_active": true,
+    "date_joined": "2023-04-18"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 10,
+  "fields": {
+    "user": 13,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP010",
+    "full_name": "Priya Sharma",
+    "department": 7,
+    "designation": "Store Keeper",
+    "is_active": true,
+    "date_joined": "2022-11-02"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 11,
+  "fields": {
+    "user": 14,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP011",
+    "full_name": "Naveen Rao",
+    "department": 2,
+    "designation": "Senior Operator",
+    "is_active": true,
+    "date_joined": "2020-07-25"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 12,
+  "fields": {
+    "user": 15,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP013",
+    "full_name": "Vishal Patel",
+    "department": 4,
+    "designation": "Mechanical Fitter",
+    "is_active": true,
+    "date_joined": "2022-01-05"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 13,
+  "fields": {
+    "user": 16,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP015",
+    "full_name": "Anoop Krishnan",
+    "department": 2,
+    "designation": "Machine Operator",
+    "is_active": true,
+    "date_joined": "2023-06-12"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 14,
+  "fields": {
+    "user": 17,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP016",
+    "full_name": "Karthik R",
+    "department": 3,
+    "designation": "QC Analyst",
+    "is_active": true,
+    "date_joined": "2022-05-20"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 15,
+  "fields": {
+    "user": 18,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP017",
+    "full_name": "Joseph Mathew",
+    "department": 7,
+    "designation": "Inventory Assistant",
+    "is_active": true,
+    "date_joined": "2020-12-01"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 16,
+  "fields": {
+    "user": 19,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP018",
+    "full_name": "Mohit Verma",
+    "department": 2,
+    "designation": "Line Supervisor",
+    "is_active": true,
+    "date_joined": "2019-10-14"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 17,
+  "fields": {
+    "user": 20,
+    "role": "admin",
+    "manager": 5,
+    "employee_id": "EMP019",
+    "full_name": "Neha Siddiqui",
+    "department": 6,
+    "designation": "HR Officer",
+    "is_active": true,
+    "date_joined": "2021-04-07"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 18,
+  "fields": {
+    "user": 21,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP020",
+    "full_name": "Sanjay Iyer",
+    "department": 5,
+    "designation": "Assistant",
+    "is_active": true,
+    "date_joined": "2022-08-22"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 22,
+  "fields": {
+    "user": 22,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP024",
+    "full_name": "Deepak Joshi",
+    "department": 7,
+    "designation": "Machine Operator",
+    "is_active": true,
+    "date_joined": "2022-01-25"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 24,
+  "fields": {
+    "user": 23,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP028",
+    "full_name": "Manoj Pillai",
+    "department": 2,
+    "designation": "Engineer",
+    "is_active": true,
+    "date_joined": "2022-05-01"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 27,
+  "fields": {
+    "user": 24,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP031",
+    "full_name": "Ramesh Kumar",
+    "department": 7,
+    "designation": "Technician",
+    "is_active": true,
+    "date_joined": "2022-08-04"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 29,
+  "fields": {
+    "user": 25,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP035",
+    "full_name": "Suresh Nair",
+    "department": 2,
+    "designation": "Assistant",
+    "is_active": true,
+    "date_joined": "2022-12-08"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 31,
+  "fields": {
+    "user": 26,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP037",
+    "full_name": "Kiran Rao",
+    "department": 3,
+    "designation": "Technician",
+    "is_active": true,
+    "date_joined": "2022-02-10"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 32,
+  "fields": {
+    "user": 27,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP038",
+    "full_name": "Manoj Pillai",
+    "department": 7,
+    "designation": "Supervisor",
+    "is_active": true,
+    "date_joined": "2022-03-11"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 37,
+  "fields": {
+    "user": 28,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP045",
+    "full_name": "Suresh Nair",
+    "department": 7,
+    "designation": "Executive",
+    "is_active": true,
+    "date_joined": "2022-10-18"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 42,
+  "fields": {
+    "user": 29,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP052",
+    "full_name": "Amit Shah",
+    "department": 7,
+    "designation": "Engineer",
+    "is_active": true,
+    "date_joined": "2022-05-25"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 49,
+  "fields": {
+    "user": 30,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP063",
+    "full_name": "Farhan Ali",
+    "department": 2,
+    "designation": "Executive",
+    "is_active": true,
+    "date_joined": "2022-04-08"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 52,
+  "fields": {
+    "user": 31,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP066",
+    "full_name": "Anil Verma",
+    "department": 7,
+    "designation": "Machine Operator",
+    "is_active": true,
+    "date_joined": "2022-07-11"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 54,
+  "fields": {
+    "user": 32,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP070",
+    "full_name": "Prakash Iyer",
+    "department": 2,
+    "designation": "Engineer",
+    "is_active": true,
+    "date_joined": "2022-11-15"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 55,
+  "fields": {
+    "user": 33,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP071",
+    "full_name": "Ramesh Kumar",
+    "department": 4,
+    "designation": "Assistant",
+    "is_active": true,
+    "date_joined": "2022-12-16"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 60,
+  "fields": {
+    "user": 34,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP078",
+    "full_name": "Manoj Pillai",
+    "department": 4,
+    "designation": "Machine Operator",
+    "is_active": true,
+    "date_joined": "2022-07-23"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 68,
+  "fields": {
+    "user": 35,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP088",
+    "full_name": "Hooli Parker",
+    "department": 5,
+    "designation": "Sr Engineer",
+    "is_active": true,
+    "date_joined": "2022-05-05"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 73,
+  "fields": {
+    "user": 36,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP095",
+    "full_name": "Joseph Klop",
+    "department": 5,
+    "designation": "Assistant",
+    "is_active": true,
+    "date_joined": "2022-12-12"
+  }
+},
+{
+  "model": "employees.employee",
+  "pk": 75,
+  "fields": {
+    "user": 37,
+    "role": "employee",
+    "manager": 5,
+    "employee_id": "EMP099",
+    "full_name": "Vikas Gupta",
+    "department": 4,
+    "designation": "Executive",
+    "is_active": true,
+    "date_joined": "2022-04-16"
+  }
+}
+]

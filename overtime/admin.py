@@ -6,40 +6,34 @@ from .models import Overtime
 class OvertimeAdmin(admin.ModelAdmin):
     list_display = (
         'employee',
-        'overtime_hours',
-        'approval_status',
+        'date',
+        'hours',
+        'status',
         'created_at',
     )
 
-    list_filter = ('approval_status',)
-    search_fields = ('employee__full_name',)
+    list_filter = ('status', 'date')
+    search_fields = ('employee__first_name', 'employee__last_name', 'employee__emp_id')
 
     # System-controlled fields (cannot be edited)
     readonly_fields = (
         'employee',
         'attendance',
-        'overtime_hours',
         'created_at',
     )
     
     fieldsets = (
         ('Overtime Transaction', {
-            'fields': ('employee', 'attendance', 'overtime_hours', 'created_at')
+            'fields': ('employee', 'attendance', 'date', 'hours', 'reason', 'created_at')
         }),
         ('Administrative Action', {
-            'fields': ('approval_status',)
+            'fields': ('status', 'reviewed_by', 'reviewed_at', 'decision_reason')
         }),
     )
 
     # Disable manual overtime creation
     def has_add_permission(self, request):
         return False
-
-    # Allow editing only approval fields
-    def get_readonly_fields(self, request, obj=None):
-        if obj:
-            return self.readonly_fields
-        return super().get_readonly_fields(request, obj)
 
 
 # ---------------------------
@@ -48,12 +42,12 @@ class OvertimeAdmin(admin.ModelAdmin):
 
 @admin.action(description="Approve selected overtime")
 def approve_overtime(modeladmin, request, queryset):
-    queryset.update(approval_status='A')
+    queryset.update(status='Approved')
 
 
 @admin.action(description="Reject selected overtime")
 def reject_overtime(modeladmin, request, queryset):
-    queryset.update(approval_status='R')
+    queryset.update(status='Rejected')
 
 
 # Register actions
