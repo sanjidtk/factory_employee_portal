@@ -1,0 +1,121 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block title %}Apply for Leave{% endblock %}
+
+{% block layout %}
+<div class="main-content" style="background-color: #f4f6f9;">
+    <!-- Top Navbar -->
+    <div class="top-navbar bg-white py-3 px-4 d-flex justify-content-between align-items-center shadow-sm">
+        <div class="d-flex align-items-center fw-bold text-dark text-decoration-none">
+            <a href="{% url 'employee_dashboard' %}" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-industry fs-4 text-primary me-2"></i> Factory Portal
+            </a>
+            <span class="ms-3 text-muted fw-normal">| New Leave Request</span>
+        </div>
+        <ul class="nav">
+            <li class="nav-item"><a href="{% url 'employee_dashboard' %}" class="nav-link text-secondary">Dashboard</a></li>
+            <li class="nav-item"><a href="{% url 'employee_history' %}" class="nav-link text-secondary">My Leave History</a></li>
+        </ul>
+        <div>
+            <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-bold">Logout</a>
+        </div>
+    </div>
+
+    <div class="content-area p-4">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="dashboard-card border-0 p-4 min-vh-75 shadow-sm">
+                    <div class="mb-4">
+                        <h4 class="fw-bold text-dark mb-1"><i class="fa-regular fa-paper-plane me-2 text-primary"></i> Apply for Leave</h4>
+                        <p class="text-muted small mb-0">Please provide the details for your leave request.</p>
+                    </div>
+
+                    <!-- Approver Info Banner -->
+                    {% if manager %}
+                    <div class="alert border-0 mb-4 d-flex align-items-center gap-3" style="background: linear-gradient(135deg, #e8f4fd, #d6eaf8); border-radius: 12px;">
+                        <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center flex-shrink-0" style="width: 46px; height: 46px; font-size: 1.2rem; font-weight: bold;">
+                            {{ manager.full_name|first }}
+                        </div>
+                        <div>
+                            <div class="small text-muted fw-bold text-uppercase" style="letter-spacing: 0.05em;">Your request will be sent to</div>
+                            <div class="fw-bold text-dark">{{ manager.full_name }}</div>
+                            <div class="small text-muted">{{ manager.designation|default:'Manager' }} · {{ manager.department.name|default:'Management' }}</div>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-3 py-2">
+                                <i class="fa-solid fa-user-tie me-1"></i> Manager
+                            </span>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="alert border-0 mb-4 d-flex align-items-center gap-3" style="background: #f0fff4; border-radius: 12px;">
+                        <div class="rounded-circle bg-success text-white d-flex justify-content-center align-items-center flex-shrink-0" style="width: 46px; height: 46px; font-size: 1.1rem;">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <div class="small text-muted fw-bold text-uppercase" style="letter-spacing: 0.05em;">Your request will be sent to</div>
+                            <div class="fw-bold text-dark">HR Administration</div>
+                            <div class="small text-muted">No direct manager assigned — HR will review your request.</div>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2">
+                                <i class="fa-solid fa-user-shield me-1"></i> HR Admin
+                            </span>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" class="needs-validation">
+                        {% csrf_token %}
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-uppercase text-secondary">Leave Type</label>
+                                {{ form.leave_type }}
+                                {% if form.leave_type.errors %}
+                                    <div class="text-danger small mt-1">{{ form.leave_type.errors|join:", " }}</div>
+                                {% endif %}
+                                <div class="form-text small text-muted">Select the category of leave you are requesting (e.g., Annual, Sick).</div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-uppercase text-secondary">Start Date</label>
+                                {{ form.start_date }}
+                                {% if form.start_date.errors %}
+                                    <div class="text-danger small mt-1">{{ form.start_date.errors|join:", " }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-uppercase text-secondary">End Date</label>
+                                {{ form.end_date }}
+                                {% if form.end_date.errors %}
+                                    <div class="text-danger small mt-1">{{ form.end_date.errors|join:", " }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-bold small text-uppercase text-secondary">Reason / Comments</label>
+                                {{ form.reason }}
+                                {% if form.reason.errors %}
+                                    <div class="text-danger small mt-1">{{ form.reason.errors|join:", " }}</div>
+                                {% endif %}
+                                <div class="form-text small text-muted">Briefly explain the reason for your leave request.</div>
+                            </div>
+                        </div>
+
+                        <hr class="text-muted opacity-25 my-4">
+
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <a href="{% url 'employee_dashboard' %}" class="btn btn-light text-secondary border px-4 rounded-pill fw-bold">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-5 rounded-pill fw-bold py-2 shadow-sm">
+                                <i class="fa-solid fa-check me-2"></i> Submit Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'dashboard/admin_base.html' %}
+
+{% block title %}Designation List{% endblock %}
+
+{% block admin_content %}
+<div class="dashboard-card pt-4 px-4 pb-4 border-0">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0 text-dark"><i class="fa-solid fa-id-badge me-2 text-primary"></i> Company Designations</h5>
+    </div>
+    
+    <div class="row g-4 px-3">
+        {% for des in designations %}
+        <div class="col-md-4 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm bg-light">
+                <div class="card-body text-center p-4">
+                    <i class="fa-solid fa-award fa-3x text-warning opacity-50 mb-3"></i>
+                    <h6 class="fw-bold mb-0">{{ des }}</h6>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center text-muted py-5">No designations found.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

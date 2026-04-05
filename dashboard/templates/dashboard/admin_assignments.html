@@ -1,0 +1,31 @@
+{% extends 'dashboard/admin_base.html' %}
+
+{% block title %}Today's Assignments{% endblock %}
+
+{% block admin_content %}
+<div class="dashboard-card pt-4 px-4 pb-4 border-0">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0 text-dark"><i class="fa-solid fa-network-wired me-2 text-primary"></i> Today's Station Assignments</h5>
+    </div>
+    
+    <div class="row g-4 px-3">
+        {% for emp in employees %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm bg-light">
+                <div class="card-body d-flex align-items-center p-3">
+                    <div class="rounded-circle bg-white text-primary border border-primary border-opacity-25 d-flex justify-content-center align-items-center me-3" style="width: 45px; height: 45px; font-weight: bold;">
+                        {{ emp.full_name|first }}
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0 text-dark">{{ emp.full_name }}</h6>
+                        <small class="text-primary text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">{{ emp.department.name|default:"General Station" }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center text-muted py-5">No assignment data available.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

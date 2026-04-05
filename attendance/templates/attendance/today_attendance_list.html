@@ -1,0 +1,66 @@
+{% extends 'dashboard/admin_base.html' %}
+
+{% block title %}Today's Attendance{% endblock %}
+
+{% block admin_content %}
+<div class="dashboard-card pt-4 px-4 pb-4 border-0">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0 text-dark"><i class="fa-solid fa-calendar-day me-2 text-primary"></i> Attendance: {{ today|date:"d M Y" }}</h5>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Employee</th>
+                    <th>Dept.</th>
+                    <th>Shift</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Status</th>
+                    <th>Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for att in records %}
+                <tr>
+                    <td>
+                        <div class="fw-bold">{{ att.employee.full_name }}</div>
+                        <small class="text-muted">{{ att.employee.employee_id }}</small>
+                    </td>
+                    <td>{{ att.employee.department.name|default:"-" }}</td>
+                    <td>
+                        {% if att.shift %}
+                            <span class="badge bg-info text-dark opacity-75">{{ att.shift.get_name_display }}</span>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>{{ att.check_in_time|time:"H:i"|default:"-" }}</td>
+                    <td>{{ att.check_out_time|time:"H:i"|default:"-" }}</td>
+                    <td>
+                        {% if att.status == 'P' %}
+                            <span class="badge badge-status bg-present">Present</span>
+                            {% if att.on_time_checkin %}
+                                <i class="fa-solid fa-circle-check text-success ms-1" title="On Time"></i>
+                            {% else %}
+                                <i class="fa-solid fa-circle-exclamation text-warning ms-1" title="Late"></i>
+                            {% endif %}
+                        {% elif att.status == 'A' %}
+                            <span class="badge badge-status bg-absent">Absent</span>
+                        {% elif att.status == 'L' %}
+                            <span class="badge badge-status bg-leave">Leave</span>
+                        {% endif %}
+                    </td>
+                    <td class="fw-bold">{{ att.worked_hours }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-5">No records for today yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

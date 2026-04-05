@@ -1,0 +1,33 @@
+{% extends 'leave/base_leave.html' %}
+
+{% block title %}Leave Balance{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Leave Balance for {{ employee.full_name }} ({{ current_year }})</h2>
+    <a href="{% url 'employee_history' %}" class="btn btn-outline-secondary">View History</a>
+</div>
+
+<div class="row">
+    {% for balance in balances %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 border-top border-4 border-primary h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title text-muted text-uppercase mb-3">{{ balance.leave_type.name }}</h5>
+                <h2 class="display-4 fw-bold text-primary mb-0">{{ balance.remaining_days }}</h2>
+                <span class="text-muted small">Remaining Days</span>
+                <hr>
+                <div class="d-flex justify-content-between text-muted small">
+                    <span>Allocated: <strong>{{ balance.allocated_days }}</strong></span>
+                    <span>Used: <strong>{{ balance.used_days }}</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center text-muted mt-5">
+        <h4>No leave balance allocated for this year.</h4>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

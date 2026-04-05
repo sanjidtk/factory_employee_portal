@@ -20,3 +20,15 @@ class AttendanceAdmin(admin.ModelAdmin):
         'on_time_checkin',
         'worked_hours_display',
     )
+    
+    list_filter = ('date', 'status', 'shift', 'on_time_checkin')
+    search_fields = ('employee__full_name', 'employee__employee_id')
+    
+    fieldsets = (
+        ('Log Details', {
+            'fields': ('employee', 'date', 'status', 'shift')
+        }),
+        ('Time Records', {
+            'fields': ('check_in_time', 'check_out_time')
+        }),
+    )

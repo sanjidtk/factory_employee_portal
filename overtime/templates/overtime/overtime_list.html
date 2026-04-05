@@ -1,0 +1,53 @@
+{% extends 'dashboard/admin_base.html' %}
+
+{% block title %}Overtime Requests{% endblock %}
+
+{% block admin_content %}
+<div class="dashboard-card pt-4 px-4 pb-4 border-0">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0 text-dark"><i class="fa-solid fa-stopwatch me-2 text-primary"></i> All Overtime Requests</h5>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Employee / Dept</th>
+                    <th>Date</th>
+                    <th>Hours</th>
+                    <th>Status</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ot in overtimes %}
+                <tr>
+                    <td>
+                        <div class="fw-bold">{{ ot.employee.full_name }}</div>
+                        <small class="text-muted">{{ ot.employee.department.name|default:"-" }}</small>
+                    </td>
+                    <td>{{ ot.attendance.date|date:"d M Y" }}</td>
+                    <td><span class="badge bg-secondary px-3 py-2">{{ ot.overtime_hours }} hrs</span></td>
+                    <td>
+                        {% if ot.approval_status == 'P' %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        {% elif ot.approval_status == 'A' %}
+                            <span class="badge bg-success">Approved</span>
+                        {% elif ot.approval_status == 'R' %}
+                            <span class="badge bg-danger">Rejected</span>
+                        {% else %}
+                            <span class="badge bg-light text-dark">Hold</span>
+                        {% endif %}
+                    </td>
+                    <td><small class="text-muted">{{ ot.decision_reason|default:"-" }}</small></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-5">No overtime requests found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

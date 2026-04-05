@@ -1,0 +1,62 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block layout %}
+<!-- Sidebar -->
+<div class="sidebar">
+    <div style="padding: 0 20px 20px 20px; font-size: 1.2rem; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <i class="fa-solid fa-industry me-2"></i> <a href="{% url 'admin_dashboard' %}" class="text-white text-decoration-none">Factory Portal</a>
+    </div>
+
+    <div class="sidebar-section">Workforce</div>
+    <a href="{% url 'employee_list' %}"><i class="fa-solid fa-users me-2"></i> Employees</a>
+    <a href="{% url 'department_list' %}"><i class="fa-solid fa-building me-2"></i> Departments</a>
+    <a href="{% url 'designation_list' %}"><i class="fa-solid fa-id-badge me-2"></i> Designations</a>
+
+    <div class="sidebar-section">Attendance</div>
+    <a href="{% url 'today_attendance' %}" id="side-today-att"><i class="fa-solid fa-calendar-check me-2"></i> Today's Attendance</a>
+    <a href="{% url 'attendance_history' %}"><i class="fa-solid fa-clock-rotate-left me-2"></i> History</a>
+
+    <div class="sidebar-section">Time</div>
+    <a href="{% url 'shift_list' %}"><i class="fa-solid fa-business-time me-2"></i> Shifts</a>
+    <a href="{% url 'overtime_list' %}"><i class="fa-solid fa-stopwatch me-2"></i> Overtime</a>
+
+    <div class="sidebar-section">Leave</div>
+    <a href="{% url 'all_leave_applications' %}"><i class="fa-solid fa-person-walking-arrow-right me-2"></i> All Leave Applications</a>
+    <a href="{% url 'all_leave_balances' %}"><i class="fa-solid fa-scale-balanced me-2"></i> Leave Balances</a>
+
+    <div class="sidebar-section">Work</div>
+    <a href="{% url 'admin_roster' %}"><i class="fa-solid fa-clipboard-list me-2"></i> Roster</a>
+    <a href="{% url 'admin_assignments' %}"><i class="fa-solid fa-network-wired me-2"></i> Assignments</a>
+
+    <div class="sidebar-section">Reports</div>
+    <a href="#"><i class="fa-solid fa-chart-pie me-2"></i> Analytics (Placeholder)</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="top-navbar">
+        <h4 class="mb-0 text-secondary" style="font-weight: 600;">Admin Panel</h4>
+        <div class="d-flex align-items-center">
+            <span class="me-3 text-muted"><i class="fa-regular fa-calendar me-1"></i> {{ today|date:"d M Y" }}</span>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user-shield me-2 text-primary"></i> 
+                    <span class="me-2">{{ request.user.employee.full_name|default:request.user.username }}</span>
+                    {% if request.user.is_superuser or request.user.employee.is_hr %}
+                        <span class="badge bg-success-subtle text-success border border-success-subtle small font-monospace" style="font-size: 0.7rem;">ADMIN</span>
+                    {% elif request.user.employee.is_manager %}
+                        <span class="badge bg-info-subtle text-info border border-info-subtle small font-monospace" style="font-size: 0.7rem;">MANAGER</span>
+                    {% endif %}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                    <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fa-solid fa-sign-out-alt me-2 text-danger"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-area">
+        {% block admin_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

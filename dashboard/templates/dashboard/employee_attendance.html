@@ -1,0 +1,87 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block title %}My Attendance History{% endblock %}
+
+{% block layout %}
+<div class="main-content" style="background-color: #f4f6f9;">
+    <!-- Top Navbar -->
+    <div class="top-navbar bg-white py-3 px-4 d-flex justify-content-between align-items-center shadow-sm">
+        <div class="d-flex align-items-center fw-bold">
+            <a href="{% url 'employee_dashboard' %}" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-industry fs-4 text-primary me-2"></i> Factory Portal
+            </a>
+            <span class="ms-3 text-muted fw-normal">| My Attendance</span>
+        </div>
+        <ul class="nav">
+            <li class="nav-item"><a href="{% url 'employee_dashboard' %}" class="nav-link text-secondary">Home</a></li>
+            <li class="nav-item"><a href="{% url 'employee_attendance' %}" class="nav-link text-primary fw-bold">My Attendance</a></li>
+            <li class="nav-item"><a href="{% url 'employee_history' %}" class="nav-link text-secondary">My Leave</a></li>
+        </ul>
+        <div>
+            <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-bold">Logout</a>
+        </div>
+    </div>
+
+    <div class="content-area p-4">
+        <div class="dashboard-card border-0 p-4 min-vh-75">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold mb-0 text-dark"><i class="fa-solid fa-calendar-check me-2 text-primary"></i> Attendance History (Last 30 Days)</h4>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle border-top">
+                    <thead>
+                        <tr class="text-muted small text-uppercase">
+                            <th class="py-3">Date</th>
+                            <th class="py-3">Check In</th>
+                            <th class="py-3">Check Out</th>
+                            <th class="py-3">Status</th>
+                            <th class="py-3">Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                        <tr>
+                            <td class="fw-bold text-dark">{{ record.date|date:"D, M d, Y" }}</td>
+                            <td>
+                                {% if record.check_in_time %}
+                                    <span class="text-dark">{{ record.check_in_time|time:"H:i" }}</span>
+                                    {% if record.on_time_checkin %}
+                                        <i class="fa-solid fa-circle-check text-success ms-1 small" title="On Time"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-circle-exclamation text-warning ms-1 small" title="Late"></i>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if record.check_out_time %}
+                                    <span class="text-dark">{{ record.check_out_time|time:"H:i" }}</span>
+                                {% else %}
+                                    <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if record.status == 'P' %}
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">Present</span>
+                                {% elif record.status == 'A' %}
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">Absent</span>
+                                {% elif record.status == 'L' %}
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">On Leave</span>
+                                {% endif %}
+                            </td>
+                            <td class="small text-muted">{{ record.note|default:"-" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">No attendance records found for this period.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

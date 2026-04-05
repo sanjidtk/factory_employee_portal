@@ -1,0 +1,98 @@
+{% extends 'dashboard/admin_base.html' %}
+
+{% block title %}Add Employee{% endblock %}
+
+{% block admin_content %}
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card dashboard-card shadow-sm border-0">
+            <div class="card-header bg-white border-bottom py-3">
+                <h4 class="mb-0 text-primary fw-bold"><i class="fa-solid fa-user-plus me-2"></i>Add New Employee</h4>
+            </div>
+            <div class="card-body p-4">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="POST" action="{% url 'admin_add_employee' %}">
+                    {% csrf_token %}
+                    
+                    <h5 class="text-secondary border-bottom pb-2 mb-3 mt-2"><i class="fa-solid fa-id-card me-2 text-info"></i>Account Information</h5>
+                    <div class="row g-3 mb-5">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted small">Username <span class="text-danger">*</span></label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                            <div class="text-danger small mt-1">{{ form.username.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted small">Password <span class="text-danger">*</span></label>
+                            {{ form.password }}
+                            {% if form.password.errors %}
+                            <div class="text-danger small mt-1">{{ form.password.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted small">First Name <span class="text-danger">*</span></label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                            <div class="text-danger small mt-1">{{ form.first_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted small">Last Name</label>
+                            {{ form.last_name }}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold text-muted small">Email Address</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+
+                    <h5 class="text-secondary border-bottom pb-2 mb-3"><i class="fa-solid fa-briefcase me-2 text-warning"></i>Employment Details</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-muted small">Employee ID <span class="text-danger">*</span></label>
+                            {{ form.employee_id }}
+                            {% if form.employee_id.errors %}
+                            <div class="text-danger small mt-1">{{ form.employee_id.errors }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-muted small">Role <span class="text-danger">*</span></label>
+                            {{ form.role }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-muted small">Date Joined <span class="text-danger">*</span></label>
+                            {{ form.date_joined }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-muted small">Department</label>
+                            {{ form.department }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-muted small">Designation <span class="text-danger">*</span></label>
+                            {{ form.designation }}
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-muted small">Manager</label>
+                            {{ form.manager }}
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-5 pt-3 border-top">
+                        <a href="{% url 'employee_list' %}" class="btn btn-outline-secondary me-3 px-4 shadow-sm fw-bold">Cancel</a>
+                        <button type="submit" class="btn btn-amber px-5 shadow-sm fw-bold"><i class="fa-solid fa-check me-2"></i>Create Employee</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

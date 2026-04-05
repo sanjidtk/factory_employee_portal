@@ -1,0 +1,242 @@
+{% extends 'dashboard/admin_base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block admin_content %}
+<!-- KPI Cards Row -->
+<div class="row g-3 mb-4">
+    <div class="col-md-4 col-lg-2">
+        <div class="dashboard-card kpi-card" style="border-top: 4px solid #3498db;">
+            <div class="text-muted text-uppercase small fw-bold">Active Employees</div>
+            <div class="kpi-value">{{ total_employees|default:0 }}</div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <div class="dashboard-card kpi-card" style="border-top: 4px solid #2ecc71;">
+            <div class="text-muted text-uppercase small fw-bold">Present Today</div>
+            <div class="kpi-value text-success">{{ present_count|default:0 }}</div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <div class="dashboard-card kpi-card" style="border-top: 4px solid #e74c3c;">
+            <div class="text-muted text-uppercase small fw-bold">Absent Today</div>
+            <div class="kpi-value text-danger">{{ absent_count|default:0 }}</div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <div class="dashboard-card kpi-card" style="border-top: 4px solid #f1c40f;">
+            <div class="text-muted text-uppercase small fw-bold">On Leave Today</div>
+            <div class="kpi-value text-warning">{{ leave_count|default:0 }}</div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <div class="dashboard-card kpi-card" style="border-top: 4px solid #9b59b6;">
+            <div class="text-muted text-uppercase small fw-bold">Pending Overtime</div>
+            <div class="kpi-value" style="color: #9b59b6;">{{ overtime_pending|default:0 }}</div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <div class="dashboard-card kpi-card" style="border-top: 4px solid #e67e22;">
+            <div class="text-muted text-uppercase small fw-bold">Pending Leave</div>
+            <div class="kpi-value" id="kpi-pending-leave" style="color: #e67e22;">{{ pending_leaves.count|default:0 }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Left Panel: Today's Attendance -->
+    <div class="col-lg-7">
+        <div class="dashboard-card">
+            <h5 class="mb-3"><i class="fa-solid fa-users-viewfinder me-2 text-primary"></i> Today's Attendance Overview</h5>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Shift / Check-in</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for att in today_attendance %}
+                        <tr onclick="openEmployeeModal('{{ att.employee.full_name }}', '{{ att.employee.department.name|default:'-' }}', '{{ att.status }}')" style="cursor: pointer;">
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center me-2" style="width: 32px; height: 32px; font-weight: bold;">
+                                        {{ att.employee.first_name|first }}
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold">{{ att.employee.full_name }}</div>
+                                        <small class="text-muted">{{ att.employee.designation|default:'' }}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ att.employee.department.name|default:"-" }}</td>
+                            <td>
+                                <div><small class="text-muted">{{ att.shift.get_name_display|default:"General" }}</small></div>
+                                <div>{{ att.check_in_time|time:"H:i"|default:"-" }}</div>
+                            </td>
+                            <td>
+                                {% if att.status == 'P' %}
+                                    <span class="badge badge-status bg-present">Present</span>
+                                {% elif att.status == 'A' %}
+                                    <span class="badge badge-status bg-absent">Absent</span>
+                                {% elif att.status == 'L' %}
+                                    <span class="badge badge-status bg-leave">Leave</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">No attendance records for today.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel: Pending Actions -->
+    <div class="col-lg-5">
+        <div class="dashboard-card">
+            <h5 class="mb-3"><i class="fa-solid fa-list-check me-2 text-warning"></i> Pending Items</h5>
+            
+            <ul class="nav nav-tabs" id="actionsTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="leaves-tab" data-bs-toggle="tab" data-bs-target="#leaves-pane" type="button" role="tab">Leave (<span id="label-pending-leave">{{ pending_leaves.count|default:0 }}</span>)</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="ot-tab" data-bs-toggle="tab" data-bs-target="#ot-pane" type="button" role="tab">Overtime (<span id="label-pending-ot">{{ overtime_pending|default:0 }}</span>)</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="actionsTabContent">
+                <!-- Leaves Tab -->
+                <div class="tab-pane fade show active" id="leaves-pane" role="tabpanel" tabindex="0">
+                    <div class="list-group list-group-flush mt-2">
+                        {% for leave in pending_leaves %}
+                        <div class="list-group-item px-0 py-3 border-bottom" id="leave-row-{{ leave.id }}">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <div class="fw-bold d-flex align-items-center gap-2">
+                                        {{ leave.employee.full_name }}
+                                        {% if leave.employee.is_manager %}
+                                            <span class="badge bg-info-subtle text-info border border-info-subtle small" style="font-size:0.65rem;">MANAGER</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="small text-muted">{{ leave.leave_type.name }} | {{ leave.start_date|date:"d M" }} - {{ leave.end_date|date:"d M" }}</div>
+                                    <div class="small mt-1 fst-italic">"{{ leave.reason|truncatechars:30 }}"</div>
+                                </div>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-success" onclick="actionLeave({{ leave.id }}, 'approve')"><i class="fa-solid fa-check"></i></button>
+                                    <button class="btn btn-outline-danger" onclick="actionLeave({{ leave.id }}, 'reject')"><i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center text-muted py-4">No pending leave requests.</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- OT Tab -->
+                <div class="tab-pane fade" id="ot-pane" role="tabpanel" tabindex="0">
+                    <div class="list-group list-group-flush mt-2">
+                        {% for ot in pending_overtimes %}
+                        <div class="list-group-item px-0 py-3 border-bottom" id="ot-row-{{ ot.id }}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-bold">{{ ot.employee.full_name }}</div>
+                                    <div class="small text-muted">{{ ot.attendance.date|date:"d M Y" }}</div>
+                                    <div><span class="badge bg-secondary">{{ ot.overtime_hours }} hrs</span></div>
+                                </div>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-success" onclick="actionOvertime({{ ot.id }}, 'approve')"><i class="fa-solid fa-check"></i></button>
+                                    <button class="btn btn-outline-danger" onclick="actionOvertime({{ ot.id }}, 'reject')"><i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center text-muted py-4">No pending overtime requests.</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Employee Detail Modal -->
+<div class="modal fade" id="empDetailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold">Employee Overview</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pb-4 text-center">
+        <div class="rounded-circle bg-primary text-white d-inline-flex justify-content-center align-items-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;" id="modInitial">A</div>
+        <h4 class="fw-bold mb-1" id="modName">Name</h4>
+        <div class="text-muted mb-3" id="modDept">Department</div>
+        <span class="badge fs-6 px-3 py-2" id="modStatus">Present</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function openEmployeeModal(name, dept, status) {
+        document.getElementById('modName').innerText = name;
+        document.getElementById('modDept').innerText = dept;
+        document.getElementById('modInitial').innerText = name.charAt(0).toUpperCase();
+        
+        let statusBadge = document.getElementById('modStatus');
+        if (status === 'P') {
+            statusBadge.className = 'badge badge-status bg-present fs-6 px-3 py-2';
+            statusBadge.innerText = 'Present';
+        } else if (status === 'A') {
+            statusBadge.className = 'badge badge-status bg-absent fs-6 px-3 py-2';
+            statusBadge.innerText = 'Absent';
+        } else if (status === 'L') {
+            statusBadge.className = 'badge badge-status bg-leave fs-6 px-3 py-2';
+            statusBadge.innerText = 'On Leave';
+        }
+        
+        new bootstrap.Modal(document.getElementById('empDetailModal')).show();
+    }
+
+    function actionLeave(id, action) {
+        handleAjaxAction(`/dashboard/ajax/leave/${id}/${action}/`, 'POST', {}, function(data) {
+            document.getElementById(`leave-row-${id}`).remove();
+            
+            // Update labels
+            const label = document.getElementById('label-pending-leave');
+            const kpi = document.getElementById('kpi-pending-leave');
+            let current = parseInt(label.innerText);
+            if (current > 0) {
+                label.innerText = current - 1;
+                kpi.innerText = current - 1;
+            }
+            showToast(`Leave application ${action}d successfully.`);
+        });
+    }
+
+    function actionOvertime(id, action) {
+        handleAjaxAction(`/dashboard/ajax/overtime/${id}/${action}/`, 'POST', {}, function(data) {
+            document.getElementById(`ot-row-${id}`).remove();
+            
+            // Update labels
+            const label = document.getElementById('label-pending-ot');
+            let current = parseInt(label.innerText);
+            if (current > 0) {
+                label.innerText = current - 1;
+            }
+            showToast(`Overtime ${action}d successfully.`);
+        });
+    }
+</script>
+{% endblock %}

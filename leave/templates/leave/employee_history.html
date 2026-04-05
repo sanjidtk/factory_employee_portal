@@ -1,0 +1,78 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block title %}My Leave History{% endblock %}
+
+{% block layout %}
+<div class="main-content" style="background-color: #f4f6f9;">
+    <!-- Top Navbar -->
+    <div class="top-navbar bg-white py-3 px-4 d-flex justify-content-between align-items-center shadow-sm">
+        <div class="d-flex align-items-center fw-bold text-dark text-decoration-none">
+            <a href="{% url 'employee_dashboard' %}" class="text-decoration-none text-dark">
+                <i class="fa-solid fa-industry fs-4 text-primary me-2"></i> Factory Portal
+            </a>
+            <span class="ms-3 text-muted fw-normal">| My Leave History</span>
+        </div>
+        <ul class="nav">
+            <li class="nav-item"><a href="{% url 'employee_dashboard' %}" class="nav-link text-secondary">Dashboard</a></li>
+            <li class="nav-item"><a href="{% url 'employee_apply' %}" class="nav-link text-secondary">Apply for Leave</a></li>
+            <li class="nav-item"><a href="{% url 'employee_balance' %}" class="nav-link text-primary fw-bold">My Balances</a></li>
+        </ul>
+        <div>
+            <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-bold">Logout</a>
+        </div>
+    </div>
+
+    <div class="content-area p-4">
+        <div class="dashboard-card border-0 p-4 min-vh-75 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold mb-0 text-dark"><i class="fa-solid fa-clock-rotate-left me-2 text-primary"></i> Leave Application History</h4>
+                <a href="{% url 'employee_apply' %}" class="btn btn-primary btn-sm rounded-pill px-3 fw-bold">
+                    <i class="fa-solid fa-plus me-1"></i> New Request
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle border-top">
+                    <thead>
+                        <tr class="text-muted small text-uppercase">
+                            <th class="py-3">Type</th>
+                            <th class="py-3">Dates</th>
+                            <th class="py-3">Days</th>
+                            <th class="py-3">Status</th>
+                            <th class="py-3">Applied On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in applications %}
+                        <tr>
+                            <td class="fw-bold text-dark">{{ app.leave_type.name }}</td>
+                            <td>
+                                <div class="small fw-bold">{{ app.start_date|date:"D, M d" }} - {{ app.end_date|date:"D, M d, Y" }}</div>
+                            </td>
+                            <td><span class="badge bg-light text-dark border">{{ app.total_days }} days</span></td>
+                            <td>
+                                {% if app.status == 'Approved' %}
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">Approved</span>
+                                {% elif app.status == 'Rejected' %}
+                                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">Rejected</span>
+                                    {% if app.rejection_reason %}
+                                        <div class="mt-1 small text-muted fst-italic">No: {{ app.rejection_reason }}</div>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">Pending</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-muted small">{{ app.applied_at|date:"M d, H:i" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">No leave applications found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

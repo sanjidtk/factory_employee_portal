@@ -1,0 +1,41 @@
+/* JAZZMIN CUSTOM ADMIN CSS - Hard Fix for Margin Offset Issues */
+
+/* Fix the massive gap between sidebar and content on form/change pages */
+.content-wrapper, 
+.main-header, 
+.main-footer {
+    transition: margin-left .3s ease-in-out !important;
+    margin-left: 250px !important;
+    z-index: 800 !important;
+}
+
+/* Ensure the navbar starts correctly */
+.main-header {
+    left: 0 !important;
+    width: auto !important;
+}
+
+/* Respond to sidebar collapsing (hamburger menu) */
+.sidebar-collapse .content-wrapper, 
+.sidebar-collapse .main-header, 
+.sidebar-collapse .main-footer {
+    margin-left: 0 !important;
+}
+
+/* Prevent the form and navbar from being squished to the right */
+.content {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+/* Fix narrow fieldsets in horizontal tabs and collapsible modes */
+.col-sm-3.control-label {
+    width: 25% !important;
+    max-width: 200px !important;
+}
+
+/* Ensure the 'Users' title and breadcrumbs aren't pushed */
+section.content-header {
+    margin-left: 0 !important;
+    padding-left: 15px !important;
+}

@@ -21,6 +21,15 @@ class OvertimeAdmin(admin.ModelAdmin):
         'overtime_hours',
         'created_at',
     )
+    
+    fieldsets = (
+        ('Overtime Transaction', {
+            'fields': ('employee', 'attendance', 'overtime_hours', 'created_at')
+        }),
+        ('Administrative Action', {
+            'fields': ('approval_status',)
+        }),
+    )
 
     # Disable manual overtime creation
     def has_add_permission(self, request):

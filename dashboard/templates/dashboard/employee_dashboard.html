@@ -1,0 +1,210 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block title %}Employee Dashboard{% endblock %}
+
+{% block layout %}
+<div class="main-content" style="background-color: #f4f6f9;">
+    <!-- Top Navbar -->
+    <div class="top-navbar bg-white py-3 px-4 d-flex justify-content-between align-items-center shadow-sm">
+        <div class="d-flex align-items-center fw-bold">
+            <i class="fa-solid fa-industry fs-4 text-primary me-2"></i> Factory Portal
+        </div>
+        <ul class="nav">
+            <li class="nav-item"><a href="{% url 'employee_dashboard' %}" class="nav-link text-primary fw-bold">Home</a></li>
+            <li class="nav-item"><a href="{% url 'employee_attendance' %}" class="nav-link text-secondary">My Attendance</a></li>
+            <li class="nav-item"><a href="{% url 'employee_history' %}" class="nav-link text-secondary">My Leave</a></li>
+            <li class="nav-item"><a href="{% url 'employee_schedule' %}" class="nav-link text-secondary">My Schedule</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-secondary small fw-bold"><i class="fa-solid fa-user-circle me-1"></i> {{ request.user.employee.full_name|default:request.user.username }}</span>
+            <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-bold">Logout</a>
+        </div>
+    </div>
+
+    <div class="content-area p-4">
+        
+        <!-- Welcome Banner -->
+        <div class="card border-0 mb-4 shadow-sm" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; border-radius: 15px;">
+            <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <h3 class="fw-bold mb-1">
+                        Good Day, {{ employee.full_name }}!
+                        {% if employee.is_manager %}
+                            <span class="badge bg-white bg-opacity-25 text-white border border-white border-opacity-50 small ms-2" style="font-size: 0.5em; vertical-align: middle;">MANAGER</span>
+                        {% endif %}
+                    </h3>
+                    <div class="opacity-75 fs-5">
+                        <i class="fa-solid fa-briefcase me-1"></i> {{ employee.designation.name|default:'Employee' }} | 
+                        <i class="fa-solid fa-building me-1 ms-2"></i> {{ employee.department.name|default:'None' }}
+                    </div>
+                </div>
+                <div class="text-end bg-white bg-opacity-25 rounded p-3">
+                    <div class="small fw-bold text-uppercase opacity-75">Reports to</div>
+                    <div class="fs-5 fw-bold"><i class="fa-solid fa-user-tie me-1"></i> {{ employee.manager.full_name|default:'No Manager' }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Leave Balance Tiles Row -->
+        <div class="row g-3 mb-4">
+            {% for balance in leave_balances %}
+                <div class="col-md-6 col-lg-3">
+                    <div class="dashboard-card kpi-card" 
+                         style="border-top: 4px solid {% cycle '#3498db' '#2ecc71' '#f1c40f' '#e67e22' %};">
+                        <div class="text-muted text-uppercase small fw-bold">{{ balance.leave_type.name }} Balance</div>
+                        <div class="kpi-value">{{ balance.remaining_days }} <small class="fs-6 text-muted">days</small></div>
+                        <div class="small text-muted mt-2">{{ balance.used_days }} used / {{ balance.allocated_days }} total</div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="dashboard-card text-center py-4 text-muted border-0 shadow-sm">
+                        No leave allocations found for {{ today.year }}.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row g-4 mb-4">
+            <!-- Today's Status -->
+            <div class="col-md-6 col-lg-6">
+                <div class="dashboard-card border-0 h-100 p-4">
+                    <h5 class="fw-bold text-secondary mb-4"><i class="fa-solid fa-clock me-2"></i> Today's Status</h5>
+                    
+                    <div class="mb-3">
+                        <div class="small fw-bold text-muted text-uppercase">Shift Assignment</div>
+                        <div class="fs-5 fw-bold text-dark">Shift A (08:00 - 17:00)</div> <!-- Placeholder for now -->
+                    </div>
+                    
+                    <hr class="text-muted opacity-25">
+                    
+                    <div>
+                        <div class="small fw-bold text-muted text-uppercase">Check-In Time</div>
+                        {% if today_attendance and today_attendance.check_in_time %}
+                            <div class="fs-3 fw-bold text-success">{{ today_attendance.check_in_time|time:"H:i A" }}</div>
+                            <span class="badge bg-success bg-opacity-10 text-success border border-success mt-1">Checked In</span>
+                        {% else %}
+                            <div class="fs-4 fw-bold text-danger mt-1">Not checked in yet</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Quick Actions -->
+            <div class="col-md-6 col-lg-6">
+                <div class="dashboard-card border-0 h-100 p-4 bg-primary bg-opacity-10 shadow-none border border-primary border-opacity-25">
+                    <h5 class="fw-bold text-primary mb-4"><i class="fa-solid fa-bolt me-2"></i> Quick Actions</h5>
+                    
+                    <div class="d-grid gap-3">
+                        <a href="{% url 'employee_apply' %}" class="btn btn-primary py-3 fw-bold shadow-sm">
+                            <i class="fa-regular fa-paper-plane me-2"></i> Apply for Leave
+                        </a>
+                        <a href="{% url 'employee_attendance' %}" class="btn btn-light border py-3 fw-bold text-secondary shadow-sm">
+                            <i class="fa-solid fa-calendar-days me-2"></i> View My Attendance
+                        </a>
+                        <a href="{% url 'employee_schedule' %}" class="btn btn-light border py-3 fw-bold text-secondary shadow-sm">
+                            <i class="fa-solid fa-clipboard-list me-2"></i> View My Schedule
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- My Recent Requests -->
+            <div class="col-12">
+                <div class="dashboard-card border-0 p-4">
+                    <h5 class="fw-bold text-secondary mb-4"><i class="fa-solid fa-clock-rotate-left me-2"></i> My Recent Requests</h5>
+                    
+                    <ul class="nav nav-tabs" id="requestsTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-bold" id="rec-leave-tab" data-bs-toggle="tab" data-bs-target="#rec-leave-pane" type="button" role="tab">Leave Applications</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-bold" id="rec-ot-tab" data-bs-toggle="tab" data-bs-target="#rec-ot-pane" type="button" role="tab">Overtime</button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content pt-3" id="requestsContent">
+                        <!-- Leaves -->
+                        <div class="tab-pane fade show active" id="rec-leave-pane" role="tabpanel" tabindex="0">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-borderless table-striped rounded">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Date Range</th>
+                                            <th>Applied On</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for leave in recent_leaves %}
+                                        <tr>
+                                            <td class="fw-bold">{{ leave.leave_type.name }}</td>
+                                            <td>{{ leave.start_date|date:"M d" }} - {{ leave.end_date|date:"M d, Y" }}</td>
+                                            <td class="text-muted">{{ leave.applied_at|date:"M d, Y" }}</td>
+                                            <td>
+                                                {% if leave.status == 'Pending' %}
+                                                    <span class="badge bg-warning text-dark">Pending</span>
+                                                {% elif leave.status == 'Approved' %}
+                                                    <span class="badge bg-success">Approved</span>
+                                                {% else %}
+                                                    <span class="badge bg-danger">Rejected</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr><td colspan="4" class="text-center text-muted">No recent leave requests.</td></tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- OT -->
+                        <div class="tab-pane fade" id="rec-ot-pane" role="tabpanel" tabindex="0">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-borderless table-striped rounded">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Hours</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for ot in recent_overtimes %}
+                                        <tr>
+                                            <td class="fw-bold">{{ ot.attendance.date|date:"M d, Y" }}</td>
+                                            <td>{{ ot.overtime_hours }} hrs</td>
+                                            <td>
+                                                {% if ot.approval_status == 'P' %}
+                                                    <span class="badge bg-warning text-dark">Pending</span>
+                                                {% elif ot.approval_status == 'A' %}
+                                                    <span class="badge bg-success">Approved</span>
+                                                {% else %}
+                                                    <span class="badge bg-danger">Rejected</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr><td colspan="3" class="text-center text-muted">No recent overtime requests.</td></tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Remove modal placeholder as we now link directly to the application page -->
+
+{% endblock %}

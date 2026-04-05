@@ -1,0 +1,353 @@
+{% extends 'dashboard/dashboard_base.html' %}
+
+{% block title %}Manager Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .mgr-navbar {
+        background: #fff;
+        border-bottom: 1px solid #e9ecef;
+        padding: 0 2rem;
+    }
+    .mgr-brand {
+        padding: 1rem 0;
+        border-bottom: 2px solid transparent;
+    }
+    .leave-card {
+        border-left: 4px solid #f39c12;
+        background: #fff;
+        border-radius: 10px;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        transition: box-shadow 0.2s;
+    }
+    .leave-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+    .ot-card {
+        border-left: 4px solid #17a2b8;
+        background: #fff;
+        border-radius: 10px;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .member-avatar {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 700; font-size: 1.1rem;
+        background: #3498db; color: #fff;
+        flex-shrink: 0;
+    }
+    .empty-state { padding: 3rem; text-align: center; color: #adb5bd; }
+    .empty-state i { font-size: 3.5rem; margin-bottom: 1rem; }
+    .section-header {
+        font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.08em; color: #6c757d; margin-bottom: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block layout %}
+<div class="main-content" style="background-color: #f4f6f9;">
+    <!-- Top Navbar -->
+    <div class="mgr-navbar">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="mgr-brand d-flex align-items-center gap-3">
+                <i class="fa-solid fa-users-gear text-primary fs-4"></i>
+                <div>
+                    <div class="fw-bold text-dark">Manager Portal</div>
+                    <div class="text-muted small">{{ manager.department.name|default:"Management" }} &middot; {{ today|date:"d M Y" }}</div>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 py-3">
+                <span class="badge bg-info-subtle text-info border border-info-subtle px-3 py-2">
+                    <i class="fa-solid fa-user-tie me-1"></i> {{ manager.full_name }}
+                </span>
+                <a href="{% url 'logout' %}" class="btn btn-sm btn-outline-danger rounded-pill px-3">
+                    <i class="fa-solid fa-sign-out-alt me-1"></i> Logout
+                </a>
+            </div>
+        </div>
+        <!-- Secondary nav for manager's personal leave actions -->
+        <div class="d-flex gap-1 pb-0">
+            <a href="{% url 'manager_dashboard' %}" class="nav-link px-3 py-2 fw-semibold text-primary border-bottom border-primary border-2">Team Overview</a>
+            <a href="{% url 'employee_history' %}" class="nav-link px-3 py-2 text-secondary">My Leave History</a>
+            <a href="{% url 'employee_apply' %}" class="nav-link px-3 py-2 text-secondary">Apply for Leave</a>
+        </div>
+    </div>
+
+    <div class="content-area p-4">
+
+        {% if using_dept_fallback %}
+        <!-- Department Fallback Notice -->
+        <div class="alert d-flex align-items-center gap-3 border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #d1ecf1, #bee5eb); border-radius: 12px;">
+            <i class="fa-solid fa-circle-info fa-2x text-info"></i>
+            <div>
+                <div class="fw-bold text-dark">Showing your Department's Requests</div>
+                <div class="small text-muted">No direct reports are assigned to you yet. Displaying all pending requests from the <strong>{{ manager.department.name }}</strong> department. Ask HR to assign employees directly to you for tighter control.</div>
+            </div>
+        </div>
+        {% elif not has_team %}
+        <!-- No team at all -->
+        <div class="alert d-flex align-items-center gap-3 border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #fff3cd, #ffeaa7); border-radius: 12px;">
+            <i class="fa-solid fa-triangle-exclamation fa-2x text-warning"></i>
+            <div>
+                <div class="fw-bold text-dark">No Team or Department Assigned</div>
+                <div class="small text-muted">You are not assigned any direct reports, and no department is linked to your profile. Contact HR to set this up. Your own leave requests go directly to HR Admin.</div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- KPI Strip -->
+        <div class="row g-3 mb-4">
+            <div class="col-sm-4">
+                <div class="dashboard-card kpi-card" style="border-top: 4px solid #3498db;">
+                    <div class="text-muted text-uppercase small fw-bold">Team Members</div>
+                    <div class="kpi-value" style="color:#3498db;">{{ team_members|length }}</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="dashboard-card kpi-card" style="border-top: 4px solid #f39c12;">
+                    <div class="text-muted text-uppercase small fw-bold">Pending Leaves</div>
+                    <div class="kpi-value" id="kpi-mgr-leaves" style="color:#f39c12;">{{ pending_leave_count }}</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="dashboard-card kpi-card" style="border-top: 4px solid #17a2b8;">
+                    <div class="text-muted text-uppercase small fw-bold">Pending Overtime</div>
+                    <div class="kpi-value" id="kpi-mgr-ot" style="color:#17a2b8;">{{ pending_ot_count }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Left: Team Overview -->
+            <div class="col-lg-5">
+                <div class="dashboard-card border-0">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-people-group me-2 text-primary"></i> My Team</h5>
+                    {% if team_members %}
+                        {% for member in team_members %}
+                        <div class="d-flex align-items-center gap-3 p-2 rounded-3 mb-2 bg-light">
+                            <div class="member-avatar">{{ member.full_name|first }}</div>
+                            <div class="flex-grow-1">
+                                <div class="fw-bold small">{{ member.full_name }}</div>
+                                <div class="text-muted" style="font-size:0.78rem;">{{ member.designation|default:"Employee" }}</div>
+                            </div>
+                            <div>
+                                {% if member.today_attendance %}
+                                    {% if member.today_attendance.status == 'P' %}
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle">Present</span>
+                                    {% elif member.today_attendance.status == 'A' %}
+                                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle">Absent</span>
+                                    {% elif member.today_attendance.status == 'L' %}
+                                        <span class="badge bg-warning-subtle text-warning border border-warning-subtle">On Leave</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">Not Checked In</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fa-solid fa-users-slash"></i>
+                            <p class="mt-2 mb-0">No team members assigned yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Right: Approval Actions -->
+            <div class="col-lg-7">
+                <!-- Leave Approvals -->
+                <div class="dashboard-card border-0 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">
+                            <i class="fa-solid fa-person-walking-arrow-right me-2 text-warning"></i>
+                            Leave Requests
+                        </h5>
+                        <span class="badge bg-warning text-dark px-3 py-2" id="mgr-label-pending-leave">{{ pending_leave_count }} Pending</span>
+                    </div>
+
+                    {% if not has_team %}
+                    <div class="alert alert-info border-0 small">
+                        <i class="fa-solid fa-info-circle me-2"></i>
+                        Leave requests from your team will appear here once team members are assigned by HR.
+                    </div>
+                    {% elif pending_leaves %}
+                        {% for leave in pending_leaves %}
+                        <div class="leave-card" id="m-leave-{{ leave.id }}">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="d-flex gap-3 align-items-start">
+                                    <div class="member-avatar" style="background:#f39c12; width:38px; height:38px; font-size:0.95rem;">
+                                        {{ leave.employee.full_name|first }}
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold">{{ leave.employee.full_name }}</div>
+                                        <div class="small text-muted mb-1">
+                                            <span class="badge bg-light text-dark border me-1">{{ leave.leave_type.name }}</span>
+                                            {{ leave.start_date|date:"d M" }} – {{ leave.end_date|date:"d M Y" }}
+                                            <span class="text-muted ms-1">({{ leave.total_days }} days)</span>
+                                        </div>
+                                        {% if leave.reason %}
+                                        <div class="small fst-italic text-secondary">"{{ leave.reason|truncatechars:60 }}"</div>
+                                        {% endif %}
+                                        <div class="small text-muted mt-1">Applied {{ leave.applied_at|date:"d M Y" }}</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column gap-2 ms-3 flex-shrink-0">
+                                    <button class="btn btn-sm btn-success px-3 fw-bold" onclick="approveLeave({{ leave.id }})">
+                                        <i class="fa-solid fa-check me-1"></i> Approve
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger px-3 fw-bold" onclick="openRejectModal({{ leave.id }})">
+                                        <i class="fa-solid fa-xmark me-1"></i> Reject
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fa-solid fa-check-circle text-success" style="font-size:2.5rem;"></i>
+                            <p class="mt-2 mb-0 text-muted">No pending leave requests from your team.</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Overtime Approvals -->
+                <div class="dashboard-card border-0">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">
+                            <i class="fa-solid fa-stopwatch me-2 text-info"></i>
+                            Overtime Requests
+                        </h5>
+                        <span class="badge bg-info text-dark px-3 py-2" id="mgr-label-pending-ot">{{ pending_ot_count }} Pending</span>
+                    </div>
+
+                    {% if not has_team %}
+                    <div class="alert alert-info border-0 small">
+                        <i class="fa-solid fa-info-circle me-2"></i>
+                        Overtime requests from your team will appear here once team members are assigned.
+                    </div>
+                    {% elif pending_overtimes %}
+                        {% for ot in pending_overtimes %}
+                        <div class="ot-card" id="m-ot-{{ ot.id }}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex gap-3 align-items-center">
+                                    <div class="member-avatar" style="background:#17a2b8; width:38px; height:38px; font-size:0.95rem;">
+                                        {{ ot.employee.full_name|first }}
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold">{{ ot.employee.full_name }}</div>
+                                        <div class="small text-muted">
+                                            {{ ot.attendance.date|date:"d M Y" }} ·
+                                            <span class="badge bg-secondary ms-1">{{ ot.overtime_hours }} hrs</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-success px-3 fw-bold" onclick="actionOvertimeManager({{ ot.id }}, 'approve')">
+                                        <i class="fa-solid fa-check me-1"></i> Approve
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger px-3 fw-bold" onclick="actionOvertimeManager({{ ot.id }}, 'reject')">
+                                        <i class="fa-solid fa-xmark me-1"></i> Reject
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fa-solid fa-check-circle text-success" style="font-size:2.5rem;"></i>
+                            <p class="mt-2 mb-0 text-muted">No pending overtime requests from your team.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reject Leave Modal -->
+<div class="modal fade" id="rejectLeaveModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold"><i class="fa-solid fa-xmark-circle text-danger me-2"></i>Reject Leave Request</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="rejectLeaveId">
+        <label class="form-label fw-bold small text-uppercase text-secondary">Reason for Rejection</label>
+        <textarea class="form-control" id="rejectReason" rows="3" placeholder="Please provide a reason for the employee..."></textarea>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger rounded-pill px-4 fw-bold" onclick="submitRejectLeave()">
+            <i class="fa-solid fa-xmark me-1"></i> Confirm Rejection
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let rejectModal;
+    document.addEventListener("DOMContentLoaded", function() {
+        rejectModal = new bootstrap.Modal(document.getElementById('rejectLeaveModal'));
+    });
+
+    function _decrementBadge(badgeId, kpiId) {
+        const badge = document.getElementById(badgeId);
+        const kpi = document.getElementById(kpiId);
+        if (badge) {
+            let n = parseInt(badge.innerText);
+            badge.innerText = Math.max(0, n - 1) + ' Pending';
+        }
+        if (kpi) {
+            let n = parseInt(kpi.innerText);
+            kpi.innerText = Math.max(0, n - 1);
+        }
+    }
+
+    function approveLeave(id) {
+        handleAjaxAction(`/manager/dashboard/ajax/leave/${id}/approve/`, 'POST', {}, function(data) {
+            document.getElementById(`m-leave-${id}`).remove();
+            _decrementBadge('mgr-label-pending-leave', 'kpi-mgr-leaves');
+            showToast('Leave request approved successfully.');
+        });
+    }
+
+    function openRejectModal(id) {
+        document.getElementById('rejectLeaveId').value = id;
+        document.getElementById('rejectReason').value = '';
+        rejectModal.show();
+    }
+
+    function submitRejectLeave() {
+        const id = document.getElementById('rejectLeaveId').value;
+        const reason = document.getElementById('rejectReason').value.trim();
+        if (!reason) {
+            showToast('Please provide a reason for rejection.', 'error');
+            return;
+        }
+        handleAjaxAction(`/manager/dashboard/ajax/leave/${id}/reject/`, 'POST', {rejection_reason: reason}, function(data) {
+            document.getElementById(`m-leave-${id}`).remove();
+            rejectModal.hide();
+            _decrementBadge('mgr-label-pending-leave', 'kpi-mgr-leaves');
+            showToast('Leave request rejected.');
+        });
+    }
+
+    function actionOvertimeManager(id, action) {
+        handleAjaxAction(`/manager/dashboard/ajax/overtime/${id}/${action}/`, 'POST', {}, function(data) {
+            document.getElementById(`m-ot-${id}`).remove();
+            _decrementBadge('mgr-label-pending-ot', 'kpi-mgr-ot');
+            showToast(`Overtime ${action}d successfully.`);
+        });
+    }
+</script>
+{% endblock %}
