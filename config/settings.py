@@ -109,7 +109,7 @@ if db_url:
                 protocol = parts[0]
                 rest = parts[1]
                 
-                auth_and_rest = rest.split('@', 1)
+                auth_and_rest = rest.rsplit('@', 1)
                 auth = auth_and_rest[0]
                 tail = auth_and_rest[1]
                 
