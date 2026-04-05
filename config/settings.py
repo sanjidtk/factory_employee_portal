@@ -111,11 +111,16 @@ if raw_db_url.startswith(('postgres://', 'postgresql://')):
             user, password = auth.split(':', 1)
             
             # Rebuild with URL-encoded password (unquote first to avoid double-encoding)
-            safe_pass = urllib.parse.quote(urllib.parse.unquote(password))
+            raw_pass = urllib.parse.unquote(password)
+            safe_pass = urllib.parse.quote(raw_pass)
             safe_db_url = f"{protocol}://{user}:{safe_pass}@{tail}"
             
-            # Print a masked version for verification in Vercel logs
-            print(f"DATABASE_URL surgery applied: {protocol}://{user}:****@{tail}")
+            # Diagnostics (Safe: only shows lengths and whitespace checks)
+            print(f"--- DB DIAGNOSTICS ---")
+            print(f"Password Length: {len(raw_pass)}")
+            print(f"Has leading/trailing whitespace: {raw_pass != raw_pass.strip()}")
+            print(f"Surgery applied successfully")
+            print(f"-----------------------")
         except Exception as e:
             print(f"DATABASE_URL surgery failed: {e}")
 
