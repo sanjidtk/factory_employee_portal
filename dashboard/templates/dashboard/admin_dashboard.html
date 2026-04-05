@@ -68,28 +68,26 @@
                                     </div>
                                     <div>
                                         <div class="fw-bold">{{ att.employee.full_name }}</div>
-                                        <small class="text-muted">{{ att.employee.designation|default:'' }}</small>
+                                        <small class="text-muted">{{ att.employee.designation.name|default:'' }}</small>
                                     </div>
                                 </div>
                             </td>
                             <td>{{ att.employee.department.name|default:"-" }}</td>
                             <td>
-                                <div><small class="text-muted">{{ att.shift.get_name_display|default:"General" }}</small></div>
-                                <div>{{ att.check_in_time|time:"H:i"|default:"-" }}</div>
+                                <div><small class="text-muted">{{ att.shift.name|default:"General" }}</small></div>
+                                <div>{{ att.check_in|time:"H:i"|default:"-" }}</div>
                             </td>
                             <td>
-                                {% if att.status == 'P' %}
+                                {% if att.status == 'Present' %}
                                     <span class="badge badge-status bg-present">Present</span>
-                                {% elif att.status == 'A' %}
+                                {% elif att.status == 'Absent' %}
                                     <span class="badge badge-status bg-absent">Absent</span>
-                                {% elif att.status == 'L' %}
+                                {% elif att.status == 'Late' %}
+                                    <span class="badge badge-status bg-warning">Late</span>
+                                {% elif att.status == 'On Leave' %}
                                     <span class="badge badge-status bg-leave">Leave</span>
                                 {% endif %}
                             </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="4" class="text-center text-muted py-4">No attendance records for today.</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -149,8 +147,8 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <div class="fw-bold">{{ ot.employee.full_name }}</div>
-                                    <div class="small text-muted">{{ ot.attendance.date|date:"d M Y" }}</div>
-                                    <div><span class="badge bg-secondary">{{ ot.overtime_hours }} hrs</span></div>
+                                    <div class="small text-muted">{{ ot.date|date:"d M Y" }}</div>
+                                    <div><span class="badge bg-secondary">{{ ot.hours }} hrs</span></div>
                                 </div>
                                 <div class="btn-group btn-group-sm">
                                     <button class="btn btn-outline-success" onclick="actionOvertime({{ ot.id }}, 'approve')"><i class="fa-solid fa-check"></i></button>
@@ -195,13 +193,16 @@
         document.getElementById('modInitial').innerText = name.charAt(0).toUpperCase();
         
         let statusBadge = document.getElementById('modStatus');
-        if (status === 'P') {
+        if (status === 'Present') {
             statusBadge.className = 'badge badge-status bg-present fs-6 px-3 py-2';
             statusBadge.innerText = 'Present';
-        } else if (status === 'A') {
+        } else if (status === 'Absent') {
             statusBadge.className = 'badge badge-status bg-absent fs-6 px-3 py-2';
             statusBadge.innerText = 'Absent';
-        } else if (status === 'L') {
+        } else if (status === 'Late') {
+            statusBadge.className = 'badge badge-status bg-warning fs-6 px-3 py-2';
+            statusBadge.innerText = 'Late';
+        } else if (status === 'On Leave') {
             statusBadge.className = 'badge badge-status bg-leave fs-6 px-3 py-2';
             statusBadge.innerText = 'On Leave';
         }

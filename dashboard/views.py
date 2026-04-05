@@ -18,16 +18,16 @@ def dashboard_view(request):
     total_employees = Employee.objects.filter(is_active=True).count()
     today_attendance = Attendance.objects.filter(date=today).select_related('employee__department')
     
-    present_count = today_attendance.filter(status='P').count()
-    absent_count = today_attendance.filter(status='A').count()
-    leave_count = today_attendance.filter(status='L').count()
+    present_count = today_attendance.filter(status='Present').count()
+    absent_count = today_attendance.filter(status='Absent').count()
+    leave_count = today_attendance.filter(status='On Leave').count()
     
-    on_time_count = today_attendance.filter(on_time_checkin=True).count()
-    late_count = today_attendance.filter(status='P', on_time_checkin=False).count()
+    on_time_count = today_attendance.filter(is_late=False, status='Present').count()
+    late_count = today_attendance.filter(status='Late').count()
     
-    pending_overtimes = Overtime.objects.filter(approval_status='P').select_related('employee')
+    pending_overtimes = Overtime.objects.filter(status='Pending').select_related('employee')
     overtime_pending_count = pending_overtimes.count()
-    overtime_approved = Overtime.objects.filter(approval_status='A').count()
+    overtime_approved = Overtime.objects.filter(status='Approved').count()
     
     pending_leaves = LeaveApplication.objects.filter(status='Pending').select_related('employee', 'leave_type')
     leave_pending_count = pending_leaves.count()
@@ -89,7 +89,7 @@ def manager_dashboard_view(request):
     # ALL pending overtime from same scope
     pending_overtimes = Overtime.objects.filter(
         employee_id__in=team_ids,
-        approval_status='P'
+        status='Pending'
     ).select_related('employee')
 
     context = {
@@ -170,19 +170,19 @@ def dashboard_detail_view(request, tile):
     if tile == "all":
         qs = Employee.objects.filter(is_active=True)
     elif tile == "present":
-        qs = Attendance.objects.filter(date=today, status='P')
+        qs = Attendance.objects.filter(date=today, status='Present')
     elif tile == "absent":
-        qs = Attendance.objects.filter(date=today, status='A')
+        qs = Attendance.objects.filter(date=today, status='Absent')
     elif tile == "leave":
-        qs = Attendance.objects.filter(date=today, status='L')
+        qs = Attendance.objects.filter(date=today, status='On Leave')
     elif tile == "ontime":
-        qs = Attendance.objects.filter(date=today, status='P', on_time_checkin=True)
+        qs = Attendance.objects.filter(date=today, status='Present', is_late=False)
     elif tile == "late":
-        qs = Attendance.objects.filter(date=today, status='P', on_time_checkin=False)
+        qs = Attendance.objects.filter(date=today, status='Late')
     elif tile == "ot_pending":
-        qs = Overtime.objects.filter(approval_status='P')
+        qs = Overtime.objects.filter(status='Pending')
     elif tile == "ot_approved":
-        qs = Overtime.objects.filter(approval_status='A')
+        qs = Overtime.objects.filter(status='Approved')
     else:
         return JsonResponse({"employees": []})
 
@@ -224,9 +224,9 @@ def ajax_overtime_action(request, ot_id, action):
             return JsonResponse({'status': 'error', 'message': 'Not your team member'}, status=403)
 
     if action == 'approve':
-        ot.approval_status = 'A'
+        ot.status = 'Approved'
     elif action == 'reject':
-        ot.approval_status = 'R'
+        ot.status = 'Rejected'
     else:
         return JsonResponse({'status': 'error', 'message': 'Invalid action'}, status=400)
 

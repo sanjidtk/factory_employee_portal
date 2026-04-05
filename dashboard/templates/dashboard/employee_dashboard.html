@@ -80,8 +80,8 @@
                     
                     <div>
                         <div class="small fw-bold text-muted text-uppercase">Check-In Time</div>
-                        {% if today_attendance and today_attendance.check_in_time %}
-                            <div class="fs-3 fw-bold text-success">{{ today_attendance.check_in_time|time:"H:i A" }}</div>
+                        {% if today_attendance and today_attendance.check_in %}
+                            <div class="fs-3 fw-bold text-success">{{ today_attendance.check_in|time:"H:i A" }}</div>
                             <span class="badge bg-success bg-opacity-10 text-success border border-success mt-1">Checked In</span>
                         {% else %}
                             <div class="fs-4 fw-bold text-danger mt-1">Not checked in yet</div>
@@ -178,11 +178,11 @@
                                         {% for ot in recent_overtimes %}
                                         <tr>
                                             <td class="fw-bold">{{ ot.attendance.date|date:"M d, Y" }}</td>
-                                            <td>{{ ot.overtime_hours }} hrs</td>
+                                            <td>{{ ot.hours }} hrs</td>
                                             <td>
-                                                {% if ot.approval_status == 'P' %}
+                                                {% if ot.status == 'Pending' %}
                                                     <span class="badge bg-warning text-dark">Pending</span>
-                                                {% elif ot.approval_status == 'A' %}
+                                                {% elif ot.status == 'Approved' %}
                                                     <span class="badge bg-success">Approved</span>
                                                 {% else %}
                                                     <span class="badge bg-danger">Rejected</span>

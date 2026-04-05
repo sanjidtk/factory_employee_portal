@@ -44,9 +44,9 @@
                         <tr>
                             <td class="fw-bold text-dark">{{ record.date|date:"D, M d, Y" }}</td>
                             <td>
-                                {% if record.check_in_time %}
-                                    <span class="text-dark">{{ record.check_in_time|time:"H:i" }}</span>
-                                    {% if record.on_time_checkin %}
+                                {% if record.check_in %}
+                                    <span class="text-dark">{{ record.check_in|time:"H:i" }}</span>
+                                    {% if not record.is_late %}
                                         <i class="fa-solid fa-circle-check text-success ms-1 small" title="On Time"></i>
                                     {% else %}
                                         <i class="fa-solid fa-circle-exclamation text-warning ms-1 small" title="Late"></i>
@@ -56,18 +56,20 @@
                                 {% endif %}
                             </td>
                             <td>
-                                {% if record.check_out_time %}
-                                    <span class="text-dark">{{ record.check_out_time|time:"H:i" }}</span>
+                                {% if record.check_out %}
+                                    <span class="text-dark">{{ record.check_out|time:"H:i" }}</span>
                                 {% else %}
                                     <span class="text-muted">-</span>
                                 {% endif %}
                             </td>
                             <td>
-                                {% if record.status == 'P' %}
+                                {% if record.status == 'Present' %}
                                     <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">Present</span>
-                                {% elif record.status == 'A' %}
+                                {% elif record.status == 'Absent' %}
                                     <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">Absent</span>
-                                {% elif record.status == 'L' %}
+                                {% elif record.status == 'Late' %}
+                                    <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">Late</span>
+                                {% elif record.status == 'On Leave' %}
                                     <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">On Leave</span>
                                 {% endif %}
                             </td>

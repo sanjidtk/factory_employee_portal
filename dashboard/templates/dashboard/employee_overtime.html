@@ -44,15 +44,15 @@
                         {% for ot in records %}
                         <tr>
                             <td class="fw-bold text-dark">{{ ot.attendance.date|date:"D, M d, Y" }}</td>
-                            <td>{{ ot.attendance.total_hours_worked }} hrs</td>
-                            <td class="text-primary fw-bold">{{ ot.overtime_hours }} hrs</td>
+                            <td>{{ ot.attendance.worked_hours }} hrs</td>
+                            <td class="text-primary fw-bold">{{ ot.hours }} hrs</td>
                             <td class="text-muted">{{ ot.created_at|date:"M d, Y" }}</td>
                             <td>
-                                {% if ot.approval_status == 'P' %}
+                                {% if ot.status == 'Pending' %}
                                     <span class="badge bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">Pending Review</span>
-                                {% elif ot.approval_status == 'A' %}
+                                {% elif ot.status == 'Approved' %}
                                     <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2">Approved</span>
-                                {% elif ot.approval_status == 'R' %}
+                                {% elif ot.status == 'Rejected' %}
                                     <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2">Rejected</span>
                                 {% endif %}
                             </td>
