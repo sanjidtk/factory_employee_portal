@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from employees.models import Employee, Department
+from employees.models import Employee, Department, Designation
 
 class AdminAddEmployeeForm(forms.Form):
     # User Details
@@ -11,9 +11,9 @@ class AdminAddEmployeeForm(forms.Form):
     email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}))
     
     # Employee Details
-    employee_id = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Emp ID (e.g. EMP-001)'}))
+    emp_id = forms.CharField(max_length=20, label="Employee ID", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Emp ID (e.g. EMP-001)'}))
     department = forms.ModelChoiceField(queryset=Department.objects.all(), required=False, widget=forms.Select(attrs={'class': 'form-select'}))
-    designation = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Designation'}))
+    designation = forms.ModelChoiceField(queryset=Designation.objects.all(), widget=forms.Select(attrs={'class': 'form-select'}))
     role = forms.ChoiceField(choices=Employee.ROLE_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}))
     manager = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, widget=forms.Select(attrs={'class': 'form-select'}))
     date_joined = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
@@ -24,11 +24,11 @@ class AdminAddEmployeeForm(forms.Form):
             raise forms.ValidationError("Username is already taken.")
         return username
 
-    def clean_employee_id(self):
-        employee_id = self.cleaned_data.get('employee_id')
-        if Employee.objects.filter(employee_id=employee_id).exists():
+    def clean_emp_id(self):
+        emp_id = self.cleaned_data.get('emp_id')
+        if Employee.objects.filter(emp_id=emp_id).exists():
             raise forms.ValidationError("Employee ID already exists.")
-        return employee_id
+        return emp_id
 
 class AdminEditEmployeeForm(forms.Form):
     # User Details
@@ -37,9 +37,9 @@ class AdminEditEmployeeForm(forms.Form):
     email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
     
     # Employee Details
-    employee_id = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
+    emp_id = forms.CharField(max_length=20, label="Employee ID", widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
     department = forms.ModelChoiceField(queryset=Department.objects.all(), required=False, widget=forms.Select(attrs={'class': 'form-select'}))
-    designation = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    designation = forms.ModelChoiceField(queryset=Designation.objects.all(), widget=forms.Select(attrs={'class': 'form-select'}))
     role = forms.ChoiceField(choices=Employee.ROLE_CHOICES, widget=forms.Select(attrs={'class': 'form-select'}))
     manager = forms.ModelChoiceField(queryset=Employee.objects.all(), required=False, widget=forms.Select(attrs={'class': 'form-select'}))
     date_joined = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))

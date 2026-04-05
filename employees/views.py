@@ -41,13 +41,13 @@ def admin_add_employee(request):
                     # Create Employee Profile
                     Employee.objects.create(
                         user=user,
-                        employee_id=form.cleaned_data['employee_id'],
+                        emp_id=form.cleaned_data['emp_id'],
                         department=form.cleaned_data['department'],
                         designation=form.cleaned_data['designation'],
                         role=form.cleaned_data['role'],
                         manager=form.cleaned_data['manager'],
                         date_joined=form.cleaned_data['date_joined'],
-                        full_name=f"{form.cleaned_data['first_name']} {form.cleaned_data['last_name']}".strip()
+                        # full_name is a property, no need to save it manually
                     )
                 messages.success(request, f"Employee {user.username} created successfully.")
                 return redirect('employee_list')
@@ -87,7 +87,7 @@ def admin_edit_employee(request, emp_id):
                     employee.manager = form.cleaned_data['manager']
                     employee.date_joined = form.cleaned_data['date_joined']
                     employee.is_active = form.cleaned_data['is_active']
-                    employee.full_name = f"{form.cleaned_data['first_name']} {form.cleaned_data.get('last_name', '')}".strip()
+                    # full_name is a property
                     employee.save()
                     
                 messages.success(request, f"Employee {employee.full_name} updated successfully.")
@@ -101,7 +101,7 @@ def admin_edit_employee(request, emp_id):
             'first_name': user.first_name if user else '',
             'last_name': user.last_name if user else '',
             'email': user.email if user else '',
-            'employee_id': employee.employee_id,
+            'emp_id': employee.emp_id,
             'department': employee.department,
             'designation': employee.designation,
             'role': employee.role,

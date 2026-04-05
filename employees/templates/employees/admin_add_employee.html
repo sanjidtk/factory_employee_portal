@@ -58,10 +58,10 @@
                     <h5 class="text-secondary border-bottom pb-2 mb-3"><i class="fa-solid fa-briefcase me-2 text-warning"></i>Employment Details</h5>
                     <div class="row g-3 mb-4">
                         <div class="col-md-4">
-                            <label class="form-label fw-bold text-muted small">Employee ID <span class="text-danger">*</span></label>
-                            {{ form.employee_id }}
-                            {% if form.employee_id.errors %}
-                            <div class="text-danger small mt-1">{{ form.employee_id.errors }}</div>
+                            <label class="form-label fw-bold text-muted small">Employee ID (Unchangeable)</label>
+                            {{ form.emp_id }}
+                            {% if form.emp_id.errors %}
+                            <div class="text-danger small mt-1">{{ form.emp_id.errors }}</div>
                             {% endif %}
                         </div>
                         <div class="col-md-4">
