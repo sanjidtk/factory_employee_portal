@@ -113,5 +113,29 @@ Create a new private/public repository on GitHub and push your code there.
 
 ### 3. Final Production Setup
 After deployment, use the Render **Dashboard** to create your first production admin:
-- Go to the "Shell" tab of your service.
-- Run: `python manage.py createsuperuser`
+- Go to the "Shell" tab on Render and run `python manage.py createsuperuser`
+
+---
+
+## 🚀 Deploy to Vercel (Always Free)
+
+This project is also optimized for **Vercel** serverless deployment.
+
+### 1. Database (Supabase)
+1. Create a free project at [Supabase](https://supabase.com).
+2. Go to **Settings -> Database -> Connection string -> URI** and copy the URI.
+3. Replace the placeholder password with your actual database password.
+
+### 2. Vercel Setup
+1. Push your code to GitHub.
+2. In Vercel, click **Add New** -> **Project** and import your repository.
+3. In **Environment Variables**, add:
+   - `DATABASE_URL`: (The Supabase URI you copied)
+   - `SECRET_KEY`: (A random long string)
+   - `DEBUG`: `False`
+   - `ALLOWED_HOSTS`: `*`
+   - `ADMIN_PASSWORD`: (A secure password for your first admin)
+4. Click **Deploy**.
+
+### 3. Creation of Admin User
+Vercel's serverless environment will automatically run migrations. To create your first admin user, set the `ADMIN_PASSWORD` variable, and the system will attempt to provision an `admin` account during the initial boot.
